@@ -7,76 +7,38 @@
   <link rel="stylesheet" href="styles.css">
   <style>
     .wheel-container {
-      perspective: 1000px;
       margin: var(--spacing-xl) auto;
-      width: 320px;
-      height: 320px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 100%;
+      max-width: 400px;
       position: relative;
+      padding: var(--spacing-xl) 0;
     }
 
-    .wheel {
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
+    .wheel-svg-container {
       position: relative;
-      box-shadow: var(--shadow-xl), 0 0 40px rgba(36, 129, 204, 0.4);
+      width: 280px;
+      height: 280px;
+      margin: 0 auto;
+    }
+
+    .wheel-svg {
+      width: 100%;
+      height: 100%;
+      transform-origin: center;
       transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+      filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.4));
     }
 
-    .wheel.spinning {
-      animation: wheelSpinFast 0.1s linear infinite;
+    .wheel-svg.spinning {
+      animation: continuousSpin 0.1s linear infinite;
     }
 
-    .wheel-segment {
-      position: absolute;
-      width: 50%;
-      height: 50%;
-      transform-origin: 100% 100%;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    @keyframes continuousSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
-    .segment-content {
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transform: rotate(45deg);
-    }
-
-    .segment-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.9);
-      color: #1a1a2e;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.875rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    }
-
-    .segment-name {
-      background: rgba(255, 255, 255, 0.95);
-      color: #1a1a2e;
-      padding: 0.25rem 0.5rem;
-      border-radius: var(--radius-md);
-      font-weight: 700;
-      font-size: 0.75rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      white-space: nowrap;
-    }
-
-    .wheel-center {
+    .wheel-center-circle {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -89,32 +51,71 @@
       align-items: center;
       justify-content: center;
       font-size: 2rem;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-      z-index: 10;
       border: 4px solid white;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      z-index: 10;
     }
 
     .wheel-pointer {
       position: absolute;
-      top: -25px;
+      top: -30px;
       left: 50%;
       transform: translateX(-50%);
       width: 0;
       height: 0;
       border-left: 20px solid transparent;
       border-right: 20px solid transparent;
-      border-top: 30px solid var(--danger-red);
+      border-top: 35px solid var(--danger-red);
       z-index: 11;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+      filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
     }
 
-    @keyframes wheelSpinFast {
-      from {
-        transform: rotate(0deg);
+    .wheel-pointer::after {
+      content: '';
+      position: absolute;
+      top: -35px;
+      left: -20px;
+      width: 40px;
+      height: 40px;
+      background: var(--danger-red);
+      border-radius: 50%;
+    }
+
+    .segment-label {
+      position: absolute;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-lg);
+      font-weight: 700;
+      font-size: 0.875rem;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 2px solid;
+      z-index: 5;
+    }
+
+    .segment-label.you {
+      animation: pulseLabel 2s ease-in-out infinite;
+    }
+
+    @keyframes pulseLabel {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
       }
-      to {
-        transform: rotate(360deg);
+      50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(74, 222, 128, 0.6);
       }
+    }
+
+    .segment-label-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
     }
 
     .player-list {
@@ -139,10 +140,9 @@
       transform: translateX(4px);
     }
 
-    .player-item.winner {
-      border-color: var(--success-green);
+    .player-item.you {
+      border-left-width: 6px;
       background: rgba(74, 222, 128, 0.1);
-      box-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
     }
 
     .player-avatar-large {
@@ -155,6 +155,7 @@
       font-weight: 600;
       font-size: 1rem;
       flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
     .player-info {
@@ -167,7 +168,7 @@
 
     .chance-bar {
       width: 100px;
-      height: 6px;
+      height: 8px;
       background: rgba(255, 255, 255, 0.1);
       border-radius: var(--radius-full);
       overflow: hidden;
@@ -177,6 +178,7 @@
     .chance-bar-fill {
       height: 100%;
       transition: width var(--transition-base);
+      box-shadow: 0 0 10px currentColor;
     }
 
     .countdown-display {
@@ -203,12 +205,8 @@
     }
 
     @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.1);
-      }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
     }
 
     .join-deposit-section {
@@ -227,6 +225,23 @@
     .join-deposit-section.blocked {
       opacity: 0.5;
       pointer-events: none;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      background: rgba(30, 30, 46, 0.4);
+      border-radius: var(--radius-md);
+      margin-bottom: 0.5rem;
+    }
+
+    .legend-color {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      flex-shrink: 0;
     }
   </style>
 </head>
@@ -269,17 +284,27 @@
 
     <!-- Spinning Wheel with Player Segments -->
     <div class="wheel-container">
-      <div class="wheel-pointer"></div>
-      <div class="wheel" id="wheel">
-        <!-- Segments will be generated by JavaScript -->
+      <div class="wheel-svg-container">
+        <div class="wheel-pointer"></div>
+        <svg class="wheel-svg" id="wheelSvg" viewBox="0 0 200 200">
+          <!-- Segments will be generated by JavaScript -->
+        </svg>
+        <div class="wheel-center-circle">🎡</div>
+        <!-- Labels will be positioned by JavaScript -->
+        <div id="segmentLabels"></div>
       </div>
-      <div class="wheel-center">🎡</div>
+    </div>
+
+    <!-- Player Color Legend -->
+    <div class="glass-card mb-3">
+      <h4 class="mb-3">Players on Wheel</h4>
+      <div id="playerLegend"></div>
     </div>
 
     <!-- Player List with Win Chances -->
     <div class="glass-card">
       <div class="flex justify-between items-center mb-3">
-        <h4 class="mb-0">Players & Win Chances</h4>
+        <h4 class="mb-0">Win Chances</h4>
         <span class="text-muted text-small">Based on bet amount</span>
       </div>
 
@@ -288,12 +313,12 @@
           <div class="player-avatar-large" style="background: #2481cc;">CR</div>
           <div class="player-info">
             <div style="font-weight: 600;">CryptoRich</div>
-            <div class="text-muted text-small">100 TON</div>
+            <div class="text-muted text-small">100 TON bet</div>
           </div>
           <div class="player-chance">
-            <div style="font-weight: 600; color: var(--success-green);">35.1%</div>
+            <div style="font-weight: 600; color: #2481cc;">35.1%</div>
             <div class="chance-bar">
-              <div class="chance-bar-fill" style="width: 35.1%; background: #2481cc;"></div>
+              <div class="chance-bar-fill" style="width: 35.1%; background: #2481cc; color: #2481cc;"></div>
             </div>
           </div>
         </div>
@@ -302,26 +327,26 @@
           <div class="player-avatar-large" style="background: #fb923c;">LK</div>
           <div class="player-info">
             <div style="font-weight: 600;">LuckyKing</div>
-            <div class="text-muted text-small">75 TON</div>
+            <div class="text-muted text-small">75 TON bet</div>
           </div>
           <div class="player-chance">
-            <div style="font-weight: 600; color: var(--success-green);">26.3%</div>
+            <div style="font-weight: 600; color: #fb923c;">26.3%</div>
             <div class="chance-bar">
-              <div class="chance-bar-fill" style="width: 26.3%; background: #fb923c;"></div>
+              <div class="chance-bar-fill" style="width: 26.3%; background: #fb923c; color: #fb923c;"></div>
             </div>
           </div>
         </div>
 
-        <div class="player-item" style="border-left-color: #4ade80;">
+        <div class="player-item you" style="border-left-color: #4ade80;">
           <div class="player-avatar-large" style="background: #4ade80; color: #1a1a2e;">JD</div>
           <div class="player-info">
-            <div style="font-weight: 600;">JohnDoe (You)</div>
-            <div class="text-muted text-small">50 TON</div>
+            <div style="font-weight: 600;">JohnDoe (You) 👈</div>
+            <div class="text-muted text-small">50 TON bet</div>
           </div>
           <div class="player-chance">
-            <div style="font-weight: 600; color: var(--success-green);">17.5%</div>
+            <div style="font-weight: 600; color: #4ade80;">17.5%</div>
             <div class="chance-bar">
-              <div class="chance-bar-fill" style="width: 17.5%; background: #4ade80;"></div>
+              <div class="chance-bar-fill" style="width: 17.5%; background: #4ade80; color: #4ade80;"></div>
             </div>
           </div>
         </div>
@@ -330,12 +355,12 @@
           <div class="player-avatar-large" style="background: #9c6ade;">BW</div>
           <div class="player-info">
             <div style="font-weight: 600;">BigWhale</div>
-            <div class="text-muted text-small">50 TON</div>
+            <div class="text-muted text-small">50 TON bet</div>
           </div>
           <div class="player-chance">
-            <div style="font-weight: 600; color: var(--success-green);">17.5%</div>
+            <div style="font-weight: 600; color: #9c6ade;">17.5%</div>
             <div class="chance-bar">
-              <div class="chance-bar-fill" style="width: 17.5%; background: #9c6ade;"></div>
+              <div class="chance-bar-fill" style="width: 17.5%; background: #9c6ade; color: #9c6ade;"></div>
             </div>
           </div>
         </div>
@@ -344,12 +369,12 @@
           <div class="player-avatar-large" style="background: #fbbf24; color: #1a1a2e;">MP</div>
           <div class="player-info">
             <div style="font-weight: 600;">MoonPlayer</div>
-            <div class="text-muted text-small">10 TON</div>
+            <div class="text-muted text-small">10 TON bet</div>
           </div>
           <div class="player-chance">
-            <div style="font-weight: 600; color: var(--success-green);">3.5%</div>
+            <div style="font-weight: 600; color: #fbbf24;">3.5%</div>
             <div class="chance-bar">
-              <div class="chance-bar-fill" style="width: 3.5%; background: #fbbf24;"></div>
+              <div class="chance-bar-fill" style="width: 3.5%; background: #fbbf24; color: #fbbf24;"></div>
             </div>
           </div>
         </div>
@@ -358,7 +383,7 @@
       <div style="background: rgba(36, 129, 204, 0.1); border-left: 4px solid var(--primary-blue); border-radius: var(--radius-md); padding: var(--spacing-md); margin-top: var(--spacing-md);">
         <div style="font-weight: 600; margin-bottom: 0.5rem;">💡 How It Works</div>
         <div class="text-secondary text-small">
-          The wheel is divided proportionally based on bet amounts. Your winning chance = your bet ÷ total pot.
+          Each colored segment shows a player's winning chance. The bigger your segment, the higher your chance to win!
         </div>
       </div>
     </div>
@@ -379,7 +404,7 @@
     <div class="glass-card" style="margin: 0;">
       <div class="flex items-center justify-between mb-2">
         <div class="text-small text-muted">Add more to increase your chances</div>
-        <div class="text-small" style="font-weight: 600;">Current: 17.5%</div>
+        <div class="text-small" style="font-weight: 600; color: #4ade80;">Your share: 17.5%</div>
       </div>
       <div class="flex gap-2">
         <input type="number" class="input" placeholder="Amount (TON)" style="flex: 1; margin: 0;" value="25">
@@ -443,49 +468,102 @@
   <script>
     // Player data with colors
     const players = [
-      { name: 'CR', fullName: 'CryptoRich', bet: 100, percentage: 35.1, color: '#2481cc' },
-      { name: 'LK', fullName: 'LuckyKing', bet: 75, percentage: 26.3, color: '#fb923c' },
-      { name: 'JD', fullName: 'JohnDoe', bet: 50, percentage: 17.5, color: '#4ade80' },
-      { name: 'BW', fullName: 'BigWhale', bet: 50, percentage: 17.5, color: '#9c6ade' },
-      { name: 'MP', fullName: 'MoonPlayer', bet: 10, percentage: 3.5, color: '#fbbf24' }
+      { name: 'CR', fullName: 'CryptoRich', bet: 100, percentage: 35.1, color: '#2481cc', isYou: false },
+      { name: 'LK', fullName: 'LuckyKing', bet: 75, percentage: 26.3, color: '#fb923c', isYou: false },
+      { name: 'JD', fullName: 'JohnDoe', bet: 50, percentage: 17.5, color: '#4ade80', isYou: true },
+      { name: 'BW', fullName: 'BigWhale', bet: 50, percentage: 17.5, color: '#9c6ade', isYou: false },
+      { name: 'MP', fullName: 'MoonPlayer', bet: 10, percentage: 3.5, color: '#fbbf24', isYou: false }
     ];
 
-    // Generate wheel segments
+    // Generate SVG wheel segments
     function generateWheelSegments() {
-      const wheel = document.getElementById('wheel');
-      wheel.innerHTML = '';
+      const svg = document.getElementById('wheelSvg');
+      const labelsContainer = document.getElementById('segmentLabels');
+      const legendContainer = document.getElementById('playerLegend');
 
-      let currentAngle = 0;
+      svg.innerHTML = '';
+      labelsContainer.innerHTML = '';
+      legendContainer.innerHTML = '';
+
+      let currentAngle = -90; // Start from top
+      const centerX = 100;
+      const centerY = 100;
+      const radius = 100;
 
       players.forEach((player, index) => {
-        const segmentAngle = (player.percentage / 100) * 360;
-        const segment = document.createElement('div');
-        segment.className = 'wheel-segment';
-        segment.style.background = player.color;
-        segment.style.transform = `rotate(${currentAngle}deg) skewY(${-90 + segmentAngle}deg)`;
-        segment.style.zIndex = players.length - index;
+        const sweepAngle = (player.percentage / 100) * 360;
+        const endAngle = currentAngle + sweepAngle;
 
-        const content = document.createElement('div');
-        content.className = 'segment-content';
-        content.style.transform = `skewY(${90 - segmentAngle}deg) rotate(${segmentAngle / 2}deg)`;
+        // Calculate path for segment
+        const startRad = (currentAngle * Math.PI) / 180;
+        const endRad = (endAngle * Math.PI) / 180;
 
-        // Show avatar for larger segments (>15%), name for smaller
-        if (player.percentage > 15) {
-          const avatar = document.createElement('div');
-          avatar.className = 'segment-avatar';
-          avatar.textContent = player.name;
-          content.appendChild(avatar);
-        } else {
-          const name = document.createElement('div');
-          name.className = 'segment-name';
-          name.textContent = player.name;
-          content.appendChild(name);
+        const x1 = centerX + radius * Math.cos(startRad);
+        const y1 = centerY + radius * Math.sin(startRad);
+        const x2 = centerX + radius * Math.cos(endRad);
+        const y2 = centerY + radius * Math.sin(endRad);
+
+        const largeArc = sweepAngle > 180 ? 1 : 0;
+
+        // Create segment path
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        const d = `M ${centerX} ${centerY} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+        path.setAttribute('d', d);
+        path.setAttribute('fill', player.color);
+        path.setAttribute('stroke', '#ffffff');
+        path.setAttribute('stroke-width', '2');
+        svg.appendChild(path);
+
+        // Add text in segment (for larger segments)
+        if (player.percentage > 8) {
+          const midAngle = currentAngle + sweepAngle / 2;
+          const midRad = (midAngle * Math.PI) / 180;
+          const textRadius = radius * 0.7;
+          const textX = centerX + textRadius * Math.cos(midRad);
+          const textY = centerY + textRadius * Math.sin(midRad);
+
+          const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          text.setAttribute('x', textX);
+          text.setAttribute('y', textY);
+          text.setAttribute('text-anchor', 'middle');
+          text.setAttribute('dominant-baseline', 'middle');
+          text.setAttribute('fill', '#ffffff');
+          text.setAttribute('font-weight', 'bold');
+          text.setAttribute('font-size', player.percentage > 20 ? '14' : '12');
+          text.setAttribute('style', 'text-shadow: 0 2px 4px rgba(0,0,0,0.5);');
+          text.textContent = player.name;
+          svg.appendChild(text);
+
+          // Add percentage
+          const percentText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          percentText.setAttribute('x', textX);
+          percentText.setAttribute('y', textY + 15);
+          percentText.setAttribute('text-anchor', 'middle');
+          percentText.setAttribute('dominant-baseline', 'middle');
+          percentText.setAttribute('fill', '#ffffff');
+          percentText.setAttribute('font-size', '10');
+          percentText.setAttribute('style', 'text-shadow: 0 2px 4px rgba(0,0,0,0.5);');
+          percentText.textContent = player.percentage + '%';
+          svg.appendChild(percentText);
         }
 
-        segment.appendChild(content);
-        wheel.appendChild(segment);
+        // Create legend item
+        const legendItem = document.createElement('div');
+        legendItem.className = 'legend-item';
+        legendItem.innerHTML = `
+          <div class="legend-color" style="background: ${player.color};"></div>
+          <div style="flex: 1;">
+            <div style="font-weight: 600; font-size: 0.875rem;">${player.fullName} ${player.isYou ? '(You) 👈' : ''}</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">${player.percentage}% • ${player.bet} TON</div>
+          </div>
+        `;
+        if (player.isYou) {
+          legendItem.style.background = 'rgba(74, 222, 128, 0.1)';
+          legendItem.style.border = '1px solid #4ade80';
+        }
+        legendContainer.appendChild(legendItem);
 
-        currentAngle += segmentAngle;
+        currentAngle = endAngle;
       });
     }
 
@@ -500,7 +578,7 @@
       countdown--;
       const countdownEl = document.getElementById('countdownNumber');
       const depositSection = document.getElementById('depositSection');
-      const wheel = document.getElementById('wheel');
+      const wheel = document.getElementById('wheelSvg');
 
       countdownEl.textContent = countdown;
 
@@ -526,17 +604,21 @@
         clearInterval(countdownInterval);
         wheel.classList.remove('spinning');
 
-        // Rotate to winner position (simulate)
-        const winnerIndex = 0; // CryptoRich wins in this example
+        // Rotate to winner position (simulate - CryptoRich wins)
+        const winnerIndex = 0;
         let rotations = 5; // 5 full spins
-        let angle = 0;
+        let targetAngle = 0;
 
+        // Calculate angle to winner's middle
         for (let i = 0; i < winnerIndex; i++) {
-          angle += (players[i].percentage / 100) * 360;
+          targetAngle += (players[i].percentage / 100) * 360;
         }
-        angle += (players[winnerIndex].percentage / 100) * 360 / 2;
+        targetAngle += (players[winnerIndex].percentage / 100) * 360 / 2;
 
-        wheel.style.transform = `rotate(${rotations * 360 + angle}deg)`;
+        // Subtract 90 degrees because we start from top
+        targetAngle = targetAngle - 90;
+
+        wheel.style.transform = `rotate(${rotations * 360 + targetAngle}deg)`;
 
         setTimeout(() => {
           document.getElementById('winnerModal').style.display = 'flex';
