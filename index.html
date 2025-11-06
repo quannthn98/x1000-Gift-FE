@@ -143,63 +143,6 @@
       }
     }
 
-    .fab-menu {
-      position: fixed;
-      bottom: 160px;
-      right: 20px;
-      display: none;
-      flex-direction: column;
-      gap: var(--spacing-md);
-      z-index: 998;
-    }
-
-    .fab-menu.active {
-      display: flex;
-      animation: slideUp 0.3s ease-out;
-    }
-
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .fab-menu-item {
-      background: rgba(30, 30, 46, 0.95);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: var(--spacing-md);
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-sm);
-      cursor: pointer;
-      transition: all var(--transition-base);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .fab-menu-item:hover {
-      background: rgba(30, 30, 46, 1);
-      transform: translateX(-5px);
-    }
-
-    .fab-menu-icon {
-      font-size: 1.5rem;
-    }
-
-    .fab-menu-text {
-      font-size: 0.875rem;
-      font-weight: 500;
-    }
-
-    .fab.active {
-      transform: rotate(45deg);
-    }
   </style>
 </head>
 <body>
@@ -377,15 +320,28 @@
     <div class="game-section" id="wheelSection">
       <div class="flex justify-between items-center mb-3">
         <h3 class="mb-0">Wheel of Fortune</h3>
-        <span class="badge badge-warning">8 Active</span>
+        <span class="badge badge-primary">System Game</span>
       </div>
 
-      <!-- Wheel Game Rooms List -->
-      <div class="wheel-game-card" onclick="window.location.href='wheel-game.html'">
+      <!-- Info Card -->
+      <div class="glass-card mb-4" style="background: rgba(36, 129, 204, 0.1); border: 2px solid var(--primary-blue);">
+        <div class="flex items-center gap-3">
+          <div style="font-size: 2.5rem;">🎡</div>
+          <div>
+            <h4 class="mb-1">How It Works</h4>
+            <p class="text-secondary text-small mb-0">
+              One system-managed game runs continuously. Join anytime, bet any amount, and your winning chance is proportional to your bet!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Current Active Wheel Game -->
+      <div class="wheel-game-card" onclick="window.location.href='wheel-game.html'" style="border-left: 4px solid var(--primary-blue);">
         <div class="flex justify-between items-center mb-2">
           <div>
-            <div style="font-weight: 600; font-size: 1.125rem;">Fortune Wheel #2847</div>
-            <div class="text-muted text-small">Created by WheelMaster</div>
+            <div style="font-weight: 600; font-size: 1.25rem;">🎡 Current Wheel Game</div>
+            <div class="text-muted text-small">Game #WHL-2847 • System Managed</div>
           </div>
           <span class="countdown-badge warning">⏱️ 42s</span>
         </div>
@@ -396,24 +352,24 @@
         <div class="flex justify-between items-center mb-3">
           <div>
             <div class="text-muted text-small">Total Pot</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: var(--success-green);">285 TON</div>
+            <div style="font-size: 2rem; font-weight: 700; color: var(--success-green);">285 TON</div>
           </div>
           <div class="text-right">
             <div class="text-muted text-small">Players</div>
-            <div style="font-size: 1.5rem; font-weight: 700;">5/10</div>
+            <div style="font-size: 2rem; font-weight: 700;">5</div>
           </div>
         </div>
 
         <!-- Players -->
         <div class="wheel-players">
-          <div class="wheel-player-avatar">JD
-            <div class="wheel-player-bet">50</div>
-          </div>
           <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">CR
             <div class="wheel-player-bet">100</div>
           </div>
           <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);">LK
             <div class="wheel-player-bet">75</div>
+          </div>
+          <div class="wheel-player-avatar">JD
+            <div class="wheel-player-bet">50</div>
           </div>
           <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">BW
             <div class="wheel-player-bet">50</div>
@@ -423,147 +379,27 @@
           </div>
         </div>
 
-        <div class="text-muted text-tiny mt-2">
-          💡 Your winning chance is proportional to your bet
+        <div class="glass-card mt-3 p-2" style="background: rgba(74, 222, 128, 0.1); border: 1px solid var(--success-green); margin: 0;">
+          <div class="flex items-center justify-between">
+            <div class="text-small">💡 Join now to participate!</div>
+            <button class="btn btn-success btn-sm" onclick="event.stopPropagation(); window.location.href='wheel-game.html'">
+              Join Game
+            </button>
+          </div>
         </div>
       </div>
 
-      <div class="wheel-game-card" onclick="window.location.href='wheel-game.html'">
-        <div class="flex justify-between items-center mb-2">
-          <div>
-            <div style="font-weight: 600; font-size: 1.125rem;">Lucky Spin #2846</div>
-            <div class="text-muted text-small">Created by SpinKing</div>
-          </div>
-          <span class="countdown-badge danger">⏱️ 3s</span>
-        </div>
-
-        <div class="divider" style="margin: 0.75rem 0;"></div>
-
-        <div class="flex justify-between items-center mb-3">
-          <div>
-            <div class="text-muted text-small">Total Pot</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: var(--success-green);">520 TON</div>
-          </div>
-          <div class="text-right">
-            <div class="text-muted text-small">Players</div>
-            <div style="font-size: 1.5rem; font-weight: 700;">8/10</div>
-          </div>
-        </div>
-
-        <div class="wheel-players">
-          <div class="wheel-player-avatar">A1
-            <div class="wheel-player-bet">100</div>
-          </div>
-          <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">B2
-            <div class="wheel-player-bet">50</div>
-          </div>
-          <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);">C3
-            <div class="wheel-player-bet">150</div>
-          </div>
-          <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">D4
-            <div class="wheel-player-bet">80</div>
-          </div>
-          <div class="wheel-player-avatar">E5
-            <div class="wheel-player-bet">40</div>
-          </div>
-          <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">F6
-            <div class="wheel-player-bet">50</div>
-          </div>
-          <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);">G7
-            <div class="wheel-player-bet">30</div>
-          </div>
-          <div class="wheel-player-avatar">H8
-            <div class="wheel-player-bet">20</div>
-          </div>
-        </div>
-
-        <div class="text-muted text-tiny mt-2">
-          ⚠️ Deposits blocked - Spinning soon!
-        </div>
-      </div>
-
-      <div class="wheel-game-card spinning">
-        <div class="flex justify-between items-center mb-2">
-          <div>
-            <div style="font-weight: 600; font-size: 1.125rem;">Big Wheel #2845</div>
-            <div class="text-muted text-small">Created by MegaPlayer</div>
-          </div>
-          <span class="badge badge-primary">🎡 Spinning</span>
-        </div>
-
-        <div class="divider" style="margin: 0.75rem 0;"></div>
-
-        <div class="flex justify-between items-center mb-3">
-          <div>
-            <div class="text-muted text-small">Total Pot</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: var(--success-green);">1,250 TON</div>
-          </div>
-          <div class="text-right">
-            <div class="text-muted text-small">Players</div>
-            <div style="font-size: 1.5rem; font-weight: 700;">10/10</div>
-          </div>
-        </div>
-
-        <div class="text-center text-muted text-small">
-          🎰 Wheel is spinning... Winner will be announced soon!
-        </div>
-      </div>
-
-      <div class="wheel-game-card" onclick="window.location.href='wheel-game.html'">
-        <div class="flex justify-between items-center mb-2">
-          <div>
-            <div style="font-weight: 600; font-size: 1.125rem;">Quick Spin #2844</div>
-            <div class="text-muted text-small">Created by FastPlayer</div>
-          </div>
-          <span class="countdown-badge warning">⏱️ 28s</span>
-        </div>
-
-        <div class="divider" style="margin: 0.75rem 0;"></div>
-
-        <div class="flex justify-between items-center mb-3">
-          <div>
-            <div class="text-muted text-small">Total Pot</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: var(--success-green);">180 TON</div>
-          </div>
-          <div class="text-right">
-            <div class="text-muted text-small">Players</div>
-            <div style="font-size: 1.5rem; font-weight: 700;">3/8</div>
-          </div>
-        </div>
-
-        <div class="wheel-players">
-          <div class="wheel-player-avatar">Q1
-            <div class="wheel-player-bet">100</div>
-          </div>
-          <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">W2
-            <div class="wheel-player-bet">50</div>
-          </div>
-          <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);">E3
-            <div class="wheel-player-bet">30</div>
-          </div>
-        </div>
-
-        <div class="text-muted text-tiny mt-2">
-          💡 Join now! More players = bigger pot
-        </div>
+      <!-- Game History Link -->
+      <div class="text-center mt-4">
+        <button class="btn btn-outline btn-block" onclick="window.location.href='wheel-history.html'">
+          📜 View Wheel Game History
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- FAB Menu -->
-  <div class="fab-menu" id="fabMenu">
-    <div class="fab-menu-item" onclick="window.location.href='create-game.html'">
-      <div class="fab-menu-icon">🪙</div>
-      <div class="fab-menu-text">Coin Flip Game</div>
-    </div>
-    <div class="fab-menu-item" onclick="window.location.href='create-wheel-game.html'">
-      <div class="fab-menu-icon">🎡</div>
-      <div class="fab-menu-text">Wheel of Fortune</div>
-    </div>
-  </div>
-
-  <!-- Floating Action Button -->
-  <button class="fab" id="fab" onclick="toggleFabMenu()" title="Create New Game">
+  <!-- Floating Action Button (Coin Flip Only) -->
+  <button class="fab" onclick="window.location.href='create-game.html'" title="Create Coin Flip Game">
     +
   </button>
 
@@ -610,26 +446,6 @@
         document.getElementById('wheelSection').classList.add('active');
       }
     }
-
-    // FAB menu toggle
-    function toggleFabMenu() {
-      const fabMenu = document.getElementById('fabMenu');
-      const fab = document.getElementById('fab');
-
-      fabMenu.classList.toggle('active');
-      fab.classList.toggle('active');
-    }
-
-    // Close FAB menu when clicking outside
-    document.addEventListener('click', function(event) {
-      const fabMenu = document.getElementById('fabMenu');
-      const fab = document.getElementById('fab');
-
-      if (!fab.contains(event.target) && !fabMenu.contains(event.target)) {
-        fabMenu.classList.remove('active');
-        fab.classList.remove('active');
-      }
-    });
 
     // Simulate countdown updates
     function updateCountdowns() {

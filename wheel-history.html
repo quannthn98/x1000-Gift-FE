@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wheel Game History - Gift_x1000</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .history-item {
+      background: rgba(30, 30, 46, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+      transition: all var(--transition-base);
+    }
+
+    .history-item:hover {
+      background: rgba(30, 30, 46, 0.8);
+      transform: translateX(4px);
+    }
+
+    .history-item.won {
+      border-left: 4px solid var(--success-green);
+    }
+
+    .history-item.lost {
+      border-left: 4px solid var(--danger-red);
+    }
+
+    .winner-section {
+      background: rgba(74, 222, 128, 0.1);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+
+    .participants-row {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-sm);
+      flex-wrap: wrap;
+    }
+
+    .participant-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .participant-avatar.winner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--success-green);
+      box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <button class="btn btn-ghost btn-sm" onclick="window.location.href='index.html'">← Back</button>
+      <h2 class="header-title mb-0">Wheel History</h2>
+      <button class="btn btn-ghost btn-sm">🔍</button>
+    </div>
+
+    <!-- Stats Summary -->
+    <div class="stats-grid mb-4">
+      <div class="stat-card">
+        <div class="stat-value">48</div>
+        <div class="stat-label">Total Games</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value text-success">12</div>
+        <div class="stat-label">Won</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value text-danger">36</div>
+        <div class="stat-label">Lost</div>
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="tabs">
+      <button class="tab active" onclick="filterGames('all')">All Games</button>
+      <button class="tab" onclick="filterGames('won')">Won</button>
+      <button class="tab" onclick="filterGames('lost')">Lost</button>
+    </div>
+
+    <!-- History List -->
+    <ul class="list" style="list-style: none; padding: 0;">
+      <li class="history-item won">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <span class="badge badge-success">Won</span>
+            <span class="text-muted text-small ml-2">Game #WHL-2847</span>
+          </div>
+          <div class="text-success" style="font-weight: 600;">+279.30 TON</div>
+        </div>
+
+        <div class="divider" style="margin: 0.75rem 0;"></div>
+
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Total Pot</span>
+          <span style="font-weight: 600;">285 TON</span>
+        </div>
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Your Bet</span>
+          <span style="font-weight: 600;">50 TON</span>
+        </div>
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Your Chance</span>
+          <span style="font-weight: 600;">17.5%</span>
+        </div>
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Players</span>
+          <span style="font-weight: 600;">5 participants</span>
+        </div>
+
+        <div class="winner-section">
+          <div class="flex items-center gap-2">
+            <div class="participant-avatar winner" style="background: #2481cc;">JD</div>
+            <div>
+              <div style="font-weight: 600; font-size: 0.875rem;">You (JohnDoe)</div>
+              <div class="text-success text-tiny">Winner • 17.5% chance</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="participants-row">
+          <span class="text-tiny text-muted">Others:</span>
+          <div class="participant-avatar" style="background: #fb923c;">CR</div>
+          <div class="participant-avatar" style="background: #4ade80;">LK</div>
+          <div class="participant-avatar" style="background: #9c6ade;">BW</div>
+          <div class="participant-avatar" style="background: #fbbf24;">MP</div>
+        </div>
+
+        <div class="flex justify-between items-center text-small mt-3">
+          <span class="text-muted">🕐 2 hours ago</span>
+          <a href="fairness-proof.html" class="btn btn-ghost btn-sm">🔒 Verify</a>
+        </div>
+      </li>
+
+      <li class="history-item lost">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <span class="badge badge-outline">Lost</span>
+            <span class="text-muted text-small ml-2">Game #WHL-2846</span>
+          </div>
+          <div class="text-danger" style="font-weight: 600;">-100.00 TON</div>
+        </div>
+
+        <div class="divider" style="margin: 0.75rem 0;"></div>
+
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Total Pot</span>
+          <span style="font-weight: 600;">420 TON</span>
+        </div>
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Your Bet</span>
+          <span style="font-weight: 600;">100 TON</span>
+        </div>
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Your Chance</span>
+          <span style="font-weight: 600;">23.8%</span>
+        </div>
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Players</span>
+          <span style="font-weight: 600;">7 participants</span>
+        </div>
+
+        <div class="winner-section">
+          <div class="flex items-center gap-2">
+            <div class="participant-avatar winner" style="background: #ef4444;">BW</div>
+            <div>
+              <div style="font-weight: 600; font-size: 0.875rem;">BigWhale</div>
+              <div class="text-success text-tiny">Winner • 35.7% chance</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="participants-row">
+          <span class="text-tiny text-muted">Others:</span>
+          <div class="participant-avatar" style="background: #2481cc;">JD</div>
+          <div class="participant-avatar" style="background: #fb923c;">CR</div>
+          <div class="participant-avatar" style="background: #4ade80;">LK</div>
+          <div class="participant-avatar" style="background: #9c6ade;">MP</div>
+          <div class="participant-avatar" style="background: #fbbf24;">GM</div>
+          <div class="participant-avatar" style="background: #2481cc;">TG</div>
+        </div>
+
+        <div class="flex justify-between items-center text-small mt-3">
+          <span class="text-muted">🕐 5 hours ago</span>
+          <a href="fairness-proof.html" class="btn btn-ghost btn-sm">🔒 Verify</a>
+        </div>
+      </li>
+
+      <li class="history-item lost">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <span class="badge badge-outline">Lost</span>
+            <span class="text-muted text-small ml-2">Game #WHL-2845</span>
+          </div>
+          <div class="text-danger" style="font-weight: 600;">-25.00 TON</div>
+        </div>
+
+        <div class="divider" style="margin: 0.75rem 0;"></div>
+
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Total Pot</span>
+          <span style="font-weight: 600;">180 TON</span>
+        </div>
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Your Bet</span>
+          <span style="font-weight: 600;">25 TON</span>
+        </div>
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Your Chance</span>
+          <span style="font-weight: 600;">13.9%</span>
+        </div>
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Players</span>
+          <span style="font-weight: 600;">4 participants</span>
+        </div>
+
+        <div class="winner-section">
+          <div class="flex items-center gap-2">
+            <div class="participant-avatar winner" style="background: #fb923c;">CR</div>
+            <div>
+              <div style="font-weight: 600; font-size: 0.875rem;">CryptoRich</div>
+              <div class="text-success text-tiny">Winner • 55.6% chance</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="participants-row">
+          <span class="text-tiny text-muted">Others:</span>
+          <div class="participant-avatar" style="background: #2481cc;">JD</div>
+          <div class="participant-avatar" style="background: #4ade80;">LK</div>
+          <div class="participant-avatar" style="background: #9c6ade;">MP</div>
+        </div>
+
+        <div class="flex justify-between items-center text-small mt-3">
+          <span class="text-muted">🕐 Yesterday</span>
+          <a href="fairness-proof.html" class="btn btn-ghost btn-sm">🔒 Verify</a>
+        </div>
+      </li>
+
+      <li class="history-item won">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <span class="badge badge-success">Won</span>
+            <span class="text-muted text-small ml-2">Game #WHL-2844</span>
+          </div>
+          <div class="text-success" style="font-weight: 600;">+196.00 TON</div>
+        </div>
+
+        <div class="divider" style="margin: 0.75rem 0;"></div>
+
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Total Pot</span>
+          <span style="font-weight: 600;">200 TON</span>
+        </div>
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Your Bet</span>
+          <span style="font-weight: 600;">75 TON</span>
+        </div>
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Your Chance</span>
+          <span style="font-weight: 600;">37.5%</span>
+        </div>
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Players</span>
+          <span style="font-weight: 600;">3 participants</span>
+        </div>
+
+        <div class="winner-section">
+          <div class="flex items-center gap-2">
+            <div class="participant-avatar winner" style="background: #2481cc;">JD</div>
+            <div>
+              <div style="font-weight: 600; font-size: 0.875rem;">You (JohnDoe)</div>
+              <div class="text-success text-tiny">Winner • 37.5% chance</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="participants-row">
+          <span class="text-tiny text-muted">Others:</span>
+          <div class="participant-avatar" style="background: #fb923c;">CR</div>
+          <div class="participant-avatar" style="background: #4ade80;">LK</div>
+        </div>
+
+        <div class="flex justify-between items-center text-small mt-3">
+          <span class="text-muted">🕐 2 days ago</span>
+          <a href="fairness-proof.html" class="btn btn-ghost btn-sm">🔒 Verify</a>
+        </div>
+      </li>
+
+      <li class="history-item lost">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <span class="badge badge-outline">Lost</span>
+            <span class="text-muted text-small ml-2">Game #WHL-2843</span>
+          </div>
+          <div class="text-danger" style="font-weight: 600;">-50.00 TON</div>
+        </div>
+
+        <div class="divider" style="margin: 0.75rem 0;"></div>
+
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Total Pot</span>
+          <span style="font-weight: 600;">350 TON</span>
+        </div>
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Your Bet</span>
+          <span style="font-weight: 600;">50 TON</span>
+        </div>
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Your Chance</span>
+          <span style="font-weight: 600;">14.3%</span>
+        </div>
+        <div class="flex justify-between text-small mb-2">
+          <span class="text-secondary">Players</span>
+          <span style="font-weight: 600;">6 participants</span>
+        </div>
+
+        <div class="winner-section">
+          <div class="flex items-center gap-2">
+            <div class="participant-avatar winner" style="background: #4ade80;">LK</div>
+            <div>
+              <div style="font-weight: 600; font-size: 0.875rem;">LuckyKing</div>
+              <div class="text-success text-tiny">Winner • 42.9% chance</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="participants-row">
+          <span class="text-tiny text-muted">Others:</span>
+          <div class="participant-avatar" style="background: #2481cc;">JD</div>
+          <div class="participant-avatar" style="background: #fb923c;">CR</div>
+          <div class="participant-avatar" style="background: #9c6ade;">BW</div>
+          <div class="participant-avatar" style="background: #fbbf24;">MP</div>
+          <div class="participant-avatar" style="background: #ef4444;">GM</div>
+        </div>
+
+        <div class="flex justify-between items-center text-small mt-3">
+          <span class="text-muted">🕐 3 days ago</span>
+          <a href="fairness-proof.html" class="btn btn-ghost btn-sm">🔒 Verify</a>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Load More Button -->
+    <button class="btn btn-outline btn-block mt-3">
+      Load More Games
+    </button>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <div class="nav-icon">🏠</div>
+      <div class="nav-label">Home</div>
+    </a>
+    <a href="wallet.html" class="nav-item">
+      <div class="nav-icon">💰</div>
+      <div class="nav-label">Wallet</div>
+    </a>
+    <a href="game-history.html" class="nav-item active">
+      <div class="nav-icon">📊</div>
+      <div class="nav-label">History</div>
+    </a>
+    <a href="leaderboard.html" class="nav-item">
+      <div class="nav-icon">🏆</div>
+      <div class="nav-label">Leaderboard</div>
+    </a>
+    <a href="profile.html" class="nav-item">
+      <div class="nav-icon">👤</div>
+      <div class="nav-label">Profile</div>
+    </a>
+  </nav>
+
+  <script>
+    function filterGames(type) {
+      // Update active tab
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      event.target.classList.add('active');
+
+      // In a real app, this would filter the games list
+      console.log('Filtering by:', type);
+    }
+  </script>
+</body>
+</html>
