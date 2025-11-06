@@ -190,126 +190,260 @@
     <!-- Coin Flip Section -->
     <div class="game-section active" id="coinFlipSection">
       <div class="flex justify-between items-center mb-3">
-        <h3 class="mb-0">Coin Flip Rooms</h3>
+        <h3 class="mb-0">Coin Flip</h3>
         <span class="badge badge-primary">12 Live</span>
       </div>
 
-      <!-- Coin Flip Game Rooms List -->
-      <ul class="list">
-        <li class="list-item interactive" onclick="window.location.href='game-room.html'">
-          <div class="list-item-header">
-            <div class="flex items-center gap-2">
-              <div class="avatar avatar-sm">JD</div>
-              <div>
-                <div class="list-item-title">JohnDoe's Game</div>
-                <div class="text-muted text-tiny">Waiting for opponent...</div>
-              </div>
-            </div>
-            <span class="badge badge-success">Open</span>
-          </div>
-          <div class="divider" style="margin: 0.75rem 0;"></div>
-          <div class="list-item-meta">
-            <span>💰 <strong>50 TON</strong></span>
-            <span>🪙 Heads</span>
-            <span>⏱️ 2m ago</span>
-          </div>
-        </li>
+      <!-- Live/History Tabs -->
+      <div class="tabs mb-3">
+        <button class="tab active" id="liveTab" onclick="switchCoinFlipTab('live')">Live Games</button>
+        <button class="tab" id="historyTab" onclick="switchCoinFlipTab('history')">History</button>
+      </div>
 
-        <li class="list-item interactive" onclick="window.location.href='game-room.html'">
-          <div class="list-item-header">
-            <div class="flex items-center gap-2">
-              <div class="avatar avatar-sm" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">CR</div>
-              <div>
-                <div class="list-item-title">CryptoRich</div>
-                <div class="text-muted text-tiny">Waiting for opponent...</div>
+      <!-- Live Games Section -->
+      <div id="liveGamesSection">
+        <!-- Coin Flip Game Rooms List -->
+        <ul class="list">
+          <li class="list-item interactive" onclick="window.location.href='game-room.html'">
+            <div class="list-item-header">
+              <div class="flex items-center gap-2">
+                <div class="avatar avatar-sm">JD</div>
+                <div>
+                  <div class="list-item-title">JohnDoe's Game</div>
+                  <div class="text-muted text-tiny">Waiting for opponent...</div>
+                </div>
               </div>
+              <span class="badge badge-success">Open</span>
             </div>
-            <span class="badge badge-success">Open</span>
-          </div>
-          <div class="divider" style="margin: 0.75rem 0;"></div>
-          <div class="list-item-meta">
-            <span>💰 <strong>100 TON</strong></span>
-            <span>🪙 Tails</span>
-            <span>⏱️ 5m ago</span>
-          </div>
-        </li>
+            <div class="divider" style="margin: 0.75rem 0;"></div>
+            <div class="list-item-meta">
+              <span>💰 <strong>50 TON</strong></span>
+              <span>🪙 Heads</span>
+              <span>⏱️ 2m ago</span>
+            </div>
+          </li>
 
-        <li class="list-item interactive" onclick="window.location.href='game-room.html'">
-          <div class="list-item-header">
-            <div class="flex items-center gap-2">
-              <div class="avatar avatar-sm" style="background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);">LK</div>
-              <div>
-                <div class="list-item-title">LuckyKing</div>
-                <div class="text-muted text-tiny">Waiting for opponent...</div>
+          <li class="list-item interactive" onclick="window.location.href='game-room.html'">
+            <div class="list-item-header">
+              <div class="flex items-center gap-2">
+                <div class="avatar avatar-sm" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">CR</div>
+                <div>
+                  <div class="list-item-title">CryptoRich</div>
+                  <div class="text-muted text-tiny">Waiting for opponent...</div>
+                </div>
               </div>
+              <span class="badge badge-success">Open</span>
             </div>
-            <span class="badge badge-success">Open</span>
-          </div>
-          <div class="divider" style="margin: 0.75rem 0;"></div>
-          <div class="list-item-meta">
-            <span>💰 <strong>25 TON</strong></span>
-            <span>🪙 Heads</span>
-            <span>⏱️ 8m ago</span>
-          </div>
-        </li>
+            <div class="divider" style="margin: 0.75rem 0;"></div>
+            <div class="list-item-meta">
+              <span>💰 <strong>100 TON</strong></span>
+              <span>🪙 Tails</span>
+              <span>⏱️ 5m ago</span>
+            </div>
+          </li>
 
-        <li class="list-item" style="opacity: 0.6;">
-          <div class="list-item-header">
-            <div class="flex items-center gap-2">
-              <div class="avatar avatar-sm" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">BW</div>
-              <div>
-                <div class="list-item-title">BigWhale</div>
-                <div class="text-muted text-tiny">Game in progress...</div>
+          <li class="list-item interactive" onclick="window.location.href='game-room.html'">
+            <div class="list-item-header">
+              <div class="flex items-center gap-2">
+                <div class="avatar avatar-sm" style="background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);">LK</div>
+                <div>
+                  <div class="list-item-title">LuckyKing</div>
+                  <div class="text-muted text-tiny">Waiting for opponent...</div>
+                </div>
               </div>
+              <span class="badge badge-success">Open</span>
             </div>
-            <span class="badge badge-warning">Playing</span>
-          </div>
-          <div class="divider" style="margin: 0.75rem 0;"></div>
-          <div class="list-item-meta">
-            <span>💰 <strong>500 TON</strong></span>
-            <span>🪙 Tails</span>
-            <span>⏱️ 12m ago</span>
-          </div>
-        </li>
+            <div class="divider" style="margin: 0.75rem 0;"></div>
+            <div class="list-item-meta">
+              <span>💰 <strong>25 TON</strong></span>
+              <span>🪙 Heads</span>
+              <span>⏱️ 8m ago</span>
+            </div>
+          </li>
 
-        <li class="list-item interactive" onclick="window.location.href='game-room.html'">
-          <div class="list-item-header">
-            <div class="flex items-center gap-2">
-              <div class="avatar avatar-sm">MP</div>
-              <div>
-                <div class="list-item-title">MoonPlayer</div>
-                <div class="text-muted text-tiny">Waiting for opponent...</div>
+          <li class="list-item" style="opacity: 0.6;">
+            <div class="list-item-header">
+              <div class="flex items-center gap-2">
+                <div class="avatar avatar-sm" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">BW</div>
+                <div>
+                  <div class="list-item-title">BigWhale</div>
+                  <div class="text-muted text-tiny">Game in progress...</div>
+                </div>
               </div>
+              <span class="badge badge-warning">Playing</span>
             </div>
-            <span class="badge badge-success">Open</span>
-          </div>
-          <div class="divider" style="margin: 0.75rem 0;"></div>
-          <div class="list-item-meta">
-            <span>💰 <strong>75 TON</strong></span>
-            <span>🪙 Heads</span>
-            <span>⏱️ 15m ago</span>
-          </div>
-        </li>
+            <div class="divider" style="margin: 0.75rem 0;"></div>
+            <div class="list-item-meta">
+              <span>💰 <strong>500 TON</strong></span>
+              <span>🪙 Tails</span>
+              <span>⏱️ 12m ago</span>
+            </div>
+          </li>
 
-        <li class="list-item interactive" onclick="window.location.href='game-room.html'">
-          <div class="list-item-header">
-            <div class="flex items-center gap-2">
-              <div class="avatar avatar-sm" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">GM</div>
-              <div>
-                <div class="list-item-title">GamerPro</div>
-                <div class="text-muted text-tiny">Waiting for opponent...</div>
+          <li class="list-item interactive" onclick="window.location.href='game-room.html'">
+            <div class="list-item-header">
+              <div class="flex items-center gap-2">
+                <div class="avatar avatar-sm">MP</div>
+                <div>
+                  <div class="list-item-title">MoonPlayer</div>
+                  <div class="text-muted text-tiny">Waiting for opponent...</div>
+                </div>
               </div>
+              <span class="badge badge-success">Open</span>
             </div>
-            <span class="badge badge-success">Open</span>
-          </div>
-          <div class="divider" style="margin: 0.75rem 0;"></div>
-          <div class="list-item-meta">
-            <span>💰 <strong>150 TON</strong></span>
-            <span>🪙 Tails</span>
-            <span>⏱️ 18m ago</span>
-          </div>
-        </li>
-      </ul>
+            <div class="divider" style="margin: 0.75rem 0;"></div>
+            <div class="list-item-meta">
+              <span>💰 <strong>75 TON</strong></span>
+              <span>🪙 Heads</span>
+              <span>⏱️ 15m ago</span>
+            </div>
+          </li>
+
+          <li class="list-item interactive" onclick="window.location.href='game-room.html'">
+            <div class="list-item-header">
+              <div class="flex items-center gap-2">
+                <div class="avatar avatar-sm" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">GM</div>
+                <div>
+                  <div class="list-item-title">GamerPro</div>
+                  <div class="text-muted text-tiny">Waiting for opponent...</div>
+                </div>
+              </div>
+              <span class="badge badge-success">Open</span>
+            </div>
+            <div class="divider" style="margin: 0.75rem 0;"></div>
+            <div class="list-item-meta">
+              <span>💰 <strong>150 TON</strong></span>
+              <span>🪙 Tails</span>
+              <span>⏱️ 18m ago</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- History Section -->
+      <div id="historyGamesSection" style="display: none;">
+        <ul class="list">
+          <!-- Won Game -->
+          <li class="list-item" style="border-left: 4px solid var(--success-green);">
+            <div class="list-item-header">
+              <div class="flex items-center gap-2">
+                <div class="avatar avatar-sm">JD</div>
+                <div>
+                  <div class="list-item-title">You vs CryptoKing</div>
+                  <div class="text-muted text-tiny">Completed 1h ago</div>
+                </div>
+              </div>
+              <span class="badge badge-success">Won</span>
+            </div>
+            <div class="divider" style="margin: 0.75rem 0;"></div>
+            <div class="list-item-meta">
+              <span>💰 <strong>100 TON</strong></span>
+              <span>🪙 Heads</span>
+              <span style="color: var(--success-green); font-weight: 600;">+98 TON</span>
+            </div>
+          </li>
+
+          <!-- Lost Game -->
+          <li class="list-item" style="border-left: 4px solid var(--danger-red);">
+            <div class="list-item-header">
+              <div class="flex items-center gap-2">
+                <div class="avatar avatar-sm">JD</div>
+                <div>
+                  <div class="list-item-title">You vs LuckyPlayer</div>
+                  <div class="text-muted text-tiny">Completed 3h ago</div>
+                </div>
+              </div>
+              <span class="badge" style="background: var(--danger-red);">Lost</span>
+            </div>
+            <div class="divider" style="margin: 0.75rem 0;"></div>
+            <div class="list-item-meta">
+              <span>💰 <strong>50 TON</strong></span>
+              <span>🪙 Tails</span>
+              <span style="color: var(--danger-red); font-weight: 600;">-50 TON</span>
+            </div>
+          </li>
+
+          <!-- Won Game -->
+          <li class="list-item" style="border-left: 4px solid var(--success-green);">
+            <div class="list-item-header">
+              <div class="flex items-center gap-2">
+                <div class="avatar avatar-sm">JD</div>
+                <div>
+                  <div class="list-item-title">You vs MoonWhale</div>
+                  <div class="text-muted text-tiny">Completed 5h ago</div>
+                </div>
+              </div>
+              <span class="badge badge-success">Won</span>
+            </div>
+            <div class="divider" style="margin: 0.75rem 0;"></div>
+            <div class="list-item-meta">
+              <span>💰 <strong>200 TON</strong></span>
+              <span>🪙 Heads</span>
+              <span style="color: var(--success-green); font-weight: 600;">+196 TON</span>
+            </div>
+          </li>
+
+          <!-- Won Game -->
+          <li class="list-item" style="border-left: 4px solid var(--success-green);">
+            <div class="list-item-header">
+              <div class="flex items-center gap-2">
+                <div class="avatar avatar-sm">JD</div>
+                <div>
+                  <div class="list-item-title">You vs ProGamer</div>
+                  <div class="text-muted text-tiny">Completed 8h ago</div>
+                </div>
+              </div>
+              <span class="badge badge-success">Won</span>
+            </div>
+            <div class="divider" style="margin: 0.75rem 0;"></div>
+            <div class="list-item-meta">
+              <span>💰 <strong>75 TON</strong></span>
+              <span>🪙 Tails</span>
+              <span style="color: var(--success-green); font-weight: 600;">+73.5 TON</span>
+            </div>
+          </li>
+
+          <!-- Lost Game -->
+          <li class="list-item" style="border-left: 4px solid var(--danger-red);">
+            <div class="list-item-header">
+              <div class="flex items-center gap-2">
+                <div class="avatar avatar-sm">JD</div>
+                <div>
+                  <div class="list-item-title">You vs BigBoss</div>
+                  <div class="text-muted text-tiny">Completed 12h ago</div>
+                </div>
+              </div>
+              <span class="badge" style="background: var(--danger-red);">Lost</span>
+            </div>
+            <div class="divider" style="margin: 0.75rem 0;"></div>
+            <div class="list-item-meta">
+              <span>💰 <strong>150 TON</strong></span>
+              <span>🪙 Heads</span>
+              <span style="color: var(--danger-red); font-weight: 600;">-150 TON</span>
+            </div>
+          </li>
+
+          <!-- Won Game -->
+          <li class="list-item" style="border-left: 4px solid var(--success-green);">
+            <div class="list-item-header">
+              <div class="flex items-center gap-2">
+                <div class="avatar avatar-sm">JD</div>
+                <div>
+                  <div class="list-item-title">You vs CryptoWolf</div>
+                  <div class="text-muted text-tiny">Completed 1d ago</div>
+                </div>
+              </div>
+              <span class="badge badge-success">Won</span>
+            </div>
+            <div class="divider" style="margin: 0.75rem 0;"></div>
+            <div class="list-item-meta">
+              <span>💰 <strong>25 TON</strong></span>
+              <span>🪙 Heads</span>
+              <span style="color: var(--success-green); font-weight: 600;">+24.5 TON</span>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <!-- Wheel of Fortune Section -->
@@ -505,6 +639,24 @@
       } else {
         document.getElementById('wheelTab').classList.add('active');
         document.getElementById('wheelSection').classList.add('active');
+      }
+    }
+
+    // Coin Flip tab switching (Live/History)
+    function switchCoinFlipTab(tab) {
+      // Update tab states
+      document.getElementById('liveTab').classList.remove('active');
+      document.getElementById('historyTab').classList.remove('active');
+
+      // Show/hide sections
+      if (tab === 'live') {
+        document.getElementById('liveTab').classList.add('active');
+        document.getElementById('liveGamesSection').style.display = 'block';
+        document.getElementById('historyGamesSection').style.display = 'none';
+      } else {
+        document.getElementById('historyTab').classList.add('active');
+        document.getElementById('liveGamesSection').style.display = 'none';
+        document.getElementById('historyGamesSection').style.display = 'block';
       }
     }
 
