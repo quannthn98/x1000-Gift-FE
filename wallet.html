@@ -69,7 +69,7 @@
         <h2 class="header-title">Wallet</h2>
       </div>
       <div class="header-right">
-        <div class="balance-pill stars" style="cursor: pointer;">
+        <div class="balance-pill stars" onclick="openStarsDepositModal()" style="cursor: pointer;">
           <span class="balance-pill-icon">⭐</span>
           <span class="balance-pill-amount">2,450</span>
         </div>
@@ -252,6 +252,72 @@
     </a>
   </nav>
 
+  <!-- Stars Deposit Modal -->
+  <div class="modal-overlay" style="display: none;" id="starsDepositModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title">⭐ Deposit Stars</h2>
+        <button class="modal-close-btn" onclick="closeStarsDepositModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-secondary text-small mb-3">Choose an amount or enter a custom amount (minimum 100 Stars)</p>
+
+        <!-- Preset Amounts -->
+        <div class="stars-preset-grid">
+          <button class="stars-preset-btn" onclick="selectStarsAmount(100)">
+            <div class="stars-preset-icon">⭐</div>
+            <div class="stars-preset-amount">100</div>
+            <div class="stars-preset-label">Stars</div>
+          </button>
+          <button class="stars-preset-btn" onclick="selectStarsAmount(500)">
+            <div class="stars-preset-icon">⭐</div>
+            <div class="stars-preset-amount">500</div>
+            <div class="stars-preset-label">Stars</div>
+          </button>
+          <button class="stars-preset-btn" onclick="selectStarsAmount(1000)">
+            <div class="stars-preset-icon">⭐</div>
+            <div class="stars-preset-amount">1,000</div>
+            <div class="stars-preset-label">Stars</div>
+          </button>
+          <button class="stars-preset-btn" onclick="selectStarsAmount(5000)">
+            <div class="stars-preset-icon">⭐</div>
+            <div class="stars-preset-amount">5,000</div>
+            <div class="stars-preset-label">Stars</div>
+          </button>
+        </div>
+
+        <!-- Custom Amount Input -->
+        <div class="divider" style="margin: var(--spacing-lg) 0;"></div>
+        <div class="input-group">
+          <label class="input-label">Custom Amount</label>
+          <div class="input-icon">
+            <span class="icon" style="left: 1rem;">⭐</span>
+            <input
+              type="number"
+              class="input"
+              id="customStarsAmount"
+              placeholder="Enter amount (min. 100)"
+              min="100"
+              step="1"
+              style="padding-left: 3rem;"
+              oninput="validateStarsAmount()"
+            >
+          </div>
+          <div class="text-danger text-small mt-1" id="starsError" style="display: none;">
+            Minimum deposit is 100 Stars
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeStarsDepositModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="proceedStarsDeposit()" id="depositBtn">
+          Deposit Stars
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="stars-modal.js"></script>
   <script>
     function copyAddress() {
       const address = 'UQC7x...8k2p'; // Full address would be here
