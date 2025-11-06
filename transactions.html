@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transactions - Gift_x1000</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <button class="btn btn-ghost btn-sm" onclick="window.history.back()">← Back</button>
+      <h2 class="header-title mb-0">Transactions</h2>
+      <button class="btn btn-ghost btn-sm">🔍</button>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="tabs">
+      <button class="tab active" onclick="filterTransactions('all')">All</button>
+      <button class="tab" onclick="filterTransactions('deposits')">Deposits</button>
+      <button class="tab" onclick="filterTransactions('withdrawals')">Withdrawals</button>
+      <button class="tab" onclick="filterTransactions('wins')">Wins</button>
+      <button class="tab" onclick="filterTransactions('losses')">Losses</button>
+    </div>
+
+    <!-- Transaction Summary -->
+    <div class="stats-grid mb-4">
+      <div class="stat-card">
+        <div class="stat-value text-success">+128</div>
+        <div class="stat-label">Total Wins</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value text-danger">-74</div>
+        <div class="stat-label">Total Losses</div>
+      </div>
+    </div>
+
+    <!-- Transactions List -->
+    <ul class="list">
+      <li class="list-item">
+        <div class="list-item-header">
+          <div class="flex items-center gap-2">
+            <div style="font-size: 1.5rem;">🎉</div>
+            <div>
+              <div class="list-item-title">Won Game</div>
+              <div class="text-muted text-tiny">Game #GX1000-4829</div>
+            </div>
+          </div>
+          <div class="text-success" style="font-weight: 600;">+49.00 TON</div>
+        </div>
+        <div class="divider" style="margin: 0.5rem 0;"></div>
+        <div class="list-item-meta">
+          <span>🕐 2 minutes ago</span>
+          <span class="badge badge-success text-tiny">Completed</span>
+        </div>
+        <div class="text-tiny text-muted mt-1" style="font-family: monospace;">
+          TX: 0x8f4a...2b9c
+        </div>
+      </li>
+
+      <li class="list-item">
+        <div class="list-item-header">
+          <div class="flex items-center gap-2">
+            <div style="font-size: 1.5rem;">⬇️</div>
+            <div>
+              <div class="list-item-title">Deposit</div>
+              <div class="text-muted text-tiny">From external wallet</div>
+            </div>
+          </div>
+          <div class="text-success" style="font-weight: 600;">+100.00 TON</div>
+        </div>
+        <div class="divider" style="margin: 0.5rem 0;"></div>
+        <div class="list-item-meta">
+          <span>🕐 1 hour ago</span>
+          <span class="badge badge-success text-tiny">Confirmed</span>
+        </div>
+        <div class="text-tiny text-muted mt-1" style="font-family: monospace;">
+          TX: 0x3d7e...8f4a
+        </div>
+      </li>
+
+      <li class="list-item">
+        <div class="list-item-header">
+          <div class="flex items-center gap-2">
+            <div style="font-size: 1.5rem;">💔</div>
+            <div>
+              <div class="list-item-title">Lost Game</div>
+              <div class="text-muted text-tiny">Game #GX1000-4801</div>
+            </div>
+          </div>
+          <div class="text-danger" style="font-weight: 600;">-25.00 TON</div>
+        </div>
+        <div class="divider" style="margin: 0.5rem 0;"></div>
+        <div class="list-item-meta">
+          <span>🕐 3 hours ago</span>
+          <span class="badge badge-outline text-tiny">Completed</span>
+        </div>
+        <div class="text-tiny text-muted mt-1" style="font-family: monospace;">
+          TX: 0x9a2b...5c3d
+        </div>
+      </li>
+
+      <li class="list-item">
+        <div class="list-item-header">
+          <div class="flex items-center gap-2">
+            <div style="font-size: 1.5rem;">⬆️</div>
+            <div>
+              <div class="list-item-title">Withdrawal</div>
+              <div class="text-muted text-tiny">To external wallet</div>
+            </div>
+          </div>
+          <div class="text-warning" style="font-weight: 600;">-50.00 TON</div>
+        </div>
+        <div class="divider" style="margin: 0.5rem 0;"></div>
+        <div class="list-item-meta">
+          <span>🕐 Yesterday</span>
+          <span class="badge badge-success text-tiny">Completed</span>
+        </div>
+        <div class="text-tiny text-muted mt-1" style="font-family: monospace;">
+          TX: 0x1f8c...7d2e
+        </div>
+      </li>
+
+      <li class="list-item">
+        <div class="list-item-header">
+          <div class="flex items-center gap-2">
+            <div style="font-size: 1.5rem;">🎉</div>
+            <div>
+              <div class="list-item-title">Won Game</div>
+              <div class="text-muted text-tiny">Game #GX1000-4756</div>
+            </div>
+          </div>
+          <div class="text-success" style="font-weight: 600;">+74.50 TON</div>
+        </div>
+        <div class="divider" style="margin: 0.5rem 0;"></div>
+        <div class="list-item-meta">
+          <span>🕐 Yesterday</span>
+          <span class="badge badge-success text-tiny">Completed</span>
+        </div>
+        <div class="text-tiny text-muted mt-1" style="font-family: monospace;">
+          TX: 0x5b9f...3a1d
+        </div>
+      </li>
+
+      <li class="list-item">
+        <div class="list-item-header">
+          <div class="flex items-center gap-2">
+            <div style="font-size: 1.5rem;">💔</div>
+            <div>
+              <div class="list-item-title">Lost Game</div>
+              <div class="text-muted text-tiny">Game #GX1000-4732</div>
+            </div>
+          </div>
+          <div class="text-danger" style="font-weight: 600;">-50.00 TON</div>
+        </div>
+        <div class="divider" style="margin: 0.5rem 0;"></div>
+        <div class="list-item-meta">
+          <span>🕐 2 days ago</span>
+          <span class="badge badge-outline text-tiny">Completed</span>
+        </div>
+        <div class="text-tiny text-muted mt-1" style="font-family: monospace;">
+          TX: 0x6c4e...8b2f
+        </div>
+      </li>
+
+      <li class="list-item">
+        <div class="list-item-header">
+          <div class="flex items-center gap-2">
+            <div style="font-size: 1.5rem;">⬇️</div>
+            <div>
+              <div class="list-item-title">Deposit</div>
+              <div class="text-muted text-tiny">From external wallet</div>
+            </div>
+          </div>
+          <div class="text-success" style="font-weight: 600;">+200.00 TON</div>
+        </div>
+        <div class="divider" style="margin: 0.5rem 0;"></div>
+        <div class="list-item-meta">
+          <span>🕐 3 days ago</span>
+          <span class="badge badge-success text-tiny">Confirmed</span>
+        </div>
+        <div class="text-tiny text-muted mt-1" style="font-family: monospace;">
+          TX: 0x2a7d...9e1c
+        </div>
+      </li>
+
+      <li class="list-item">
+        <div class="list-item-header">
+          <div class="flex items-center gap-2">
+            <div style="font-size: 1.5rem;">🎉</div>
+            <div>
+              <div class="list-item-title">Won Game</div>
+              <div class="text-muted text-tiny">Game #GX1000-4698</div>
+            </div>
+          </div>
+          <div class="text-success" style="font-weight: 600;">+99.00 TON</div>
+        </div>
+        <div class="divider" style="margin: 0.5rem 0;"></div>
+        <div class="list-item-meta">
+          <span>🕐 4 days ago</span>
+          <span class="badge badge-success text-tiny">Completed</span>
+        </div>
+        <div class="text-tiny text-muted mt-1" style="font-family: monospace;">
+          TX: 0x4e9b...1f3a
+        </div>
+      </li>
+    </ul>
+
+    <!-- Load More Button -->
+    <button class="btn btn-outline btn-block mt-3">
+      Load More Transactions
+    </button>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <div class="nav-icon">🏠</div>
+      <div class="nav-label">Home</div>
+    </a>
+    <a href="wallet.html" class="nav-item active">
+      <div class="nav-icon">💰</div>
+      <div class="nav-label">Wallet</div>
+    </a>
+    <a href="game-history.html" class="nav-item">
+      <div class="nav-icon">📊</div>
+      <div class="nav-label">History</div>
+    </a>
+    <a href="leaderboard.html" class="nav-item">
+      <div class="nav-icon">🏆</div>
+      <div class="nav-label">Leaderboard</div>
+    </a>
+    <a href="profile.html" class="nav-item">
+      <div class="nav-icon">👤</div>
+      <div class="nav-label">Profile</div>
+    </a>
+  </nav>
+
+  <script>
+    function filterTransactions(type) {
+      // Update active tab
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      event.target.classList.add('active');
+
+      // In a real app, this would filter the transaction list
+      console.log('Filtering by:', type);
+    }
+  </script>
+</body>
+</html>

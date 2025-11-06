@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - Gift_x1000</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .setting-item {
+      background: rgba(30, 30, 46, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-md);
+    }
+
+    .setting-info {
+      flex: 1;
+    }
+
+    .setting-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .setting-description {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <button class="btn btn-ghost btn-sm" onclick="window.history.back()">← Back</button>
+      <h2 class="header-title mb-0">Settings</h2>
+      <div style="width: 60px;"></div>
+    </div>
+
+    <!-- Account Section -->
+    <h3 class="mb-3">Account</h3>
+    <div class="setting-item" onclick="window.location.href='profile.html'">
+      <div class="setting-info">
+        <div class="setting-title">Profile</div>
+        <div class="setting-description">View and edit your profile</div>
+      </div>
+      <div style="font-size: 1.5rem; color: var(--text-muted);">→</div>
+    </div>
+
+    <div class="setting-item" onclick="window.location.href='wallet.html'">
+      <div class="setting-info">
+        <div class="setting-title">Wallet Management</div>
+        <div class="setting-description">Manage your TON wallet</div>
+      </div>
+      <div style="font-size: 1.5rem; color: var(--text-muted);">→</div>
+    </div>
+
+    <!-- Notifications Section -->
+    <h3 class="mb-3 mt-4">Notifications</h3>
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-title">Push Notifications</div>
+        <div class="setting-description">Receive alerts for game invites and results</div>
+      </div>
+      <div class="toggle active" onclick="toggleSetting(this)">
+        <div class="toggle-thumb"></div>
+      </div>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-title">Game Updates</div>
+        <div class="setting-description">Get notified about new features</div>
+      </div>
+      <div class="toggle active" onclick="toggleSetting(this)">
+        <div class="toggle-thumb"></div>
+      </div>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-title">Win/Loss Alerts</div>
+        <div class="setting-description">Immediate notification of game results</div>
+      </div>
+      <div class="toggle active" onclick="toggleSetting(this)">
+        <div class="toggle-thumb"></div>
+      </div>
+    </div>
+
+    <!-- Preferences Section -->
+    <h3 class="mb-3 mt-4">Preferences</h3>
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-title">Language</div>
+        <div class="setting-description">English</div>
+      </div>
+      <div style="font-size: 1.5rem; color: var(--text-muted);">→</div>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-title">Sound Effects</div>
+        <div class="setting-description">Play sounds for game events</div>
+      </div>
+      <div class="toggle active" onclick="toggleSetting(this)">
+        <div class="toggle-thumb"></div>
+      </div>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-title">Haptic Feedback</div>
+        <div class="setting-description">Vibrate on interactions</div>
+      </div>
+      <div class="toggle active" onclick="toggleSetting(this)">
+        <div class="toggle-thumb"></div>
+      </div>
+    </div>
+
+    <!-- Gaming Section -->
+    <h3 class="mb-3 mt-4">Gaming</h3>
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-title">Auto-Bet Limits</div>
+        <div class="setting-description">Maximum bet per game: 100 TON</div>
+      </div>
+      <div style="font-size: 1.5rem; color: var(--text-muted);">→</div>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-title">Quick Join</div>
+        <div class="setting-description">Automatically join available rooms</div>
+      </div>
+      <div class="toggle" onclick="toggleSetting(this)">
+        <div class="toggle-thumb"></div>
+      </div>
+    </div>
+
+    <!-- Responsible Gaming Section -->
+    <h3 class="mb-3 mt-4">Responsible Gaming</h3>
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-title">Daily Loss Limit</div>
+        <div class="setting-description">Set a maximum daily loss limit</div>
+      </div>
+      <div style="font-size: 1.5rem; color: var(--text-muted);">→</div>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-title">Session Time Reminders</div>
+        <div class="setting-description">Get reminded after extended play</div>
+      </div>
+      <div class="toggle" onclick="toggleSetting(this)">
+        <div class="toggle-thumb"></div>
+      </div>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-title">Self-Exclusion</div>
+        <div class="setting-description">Take a break from gaming</div>
+      </div>
+      <div style="font-size: 1.5rem; color: var(--text-muted);">→</div>
+    </div>
+
+    <!-- Security Section -->
+    <h3 class="mb-3 mt-4">Security & Privacy</h3>
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-title">Two-Factor Authentication</div>
+        <div class="setting-description">Add extra security to your account</div>
+      </div>
+      <div class="toggle" onclick="toggleSetting(this)">
+        <div class="toggle-thumb"></div>
+      </div>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-title">Privacy Settings</div>
+        <div class="setting-description">Control who can see your profile</div>
+      </div>
+      <div style="font-size: 1.5rem; color: var(--text-muted);">→</div>
+    </div>
+
+    <!-- Legal Section -->
+    <h3 class="mb-3 mt-4">Legal</h3>
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-title">Terms of Service</div>
+        <div class="setting-description">Read our terms and conditions</div>
+      </div>
+      <div style="font-size: 1.5rem; color: var(--text-muted);">→</div>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-title">Privacy Policy</div>
+        <div class="setting-description">How we handle your data</div>
+      </div>
+      <div style="font-size: 1.5rem; color: var(--text-muted);">→</div>
+    </div>
+
+    <!-- Support Section -->
+    <h3 class="mb-3 mt-4">Support</h3>
+    <div class="setting-item" onclick="window.location.href='how-to-play.html'">
+      <div class="setting-info">
+        <div class="setting-title">Help & Tutorial</div>
+        <div class="setting-description">Learn how to play</div>
+      </div>
+      <div style="font-size: 1.5rem; color: var(--text-muted);">→</div>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-title">Contact Support</div>
+        <div class="setting-description">Get help from our team</div>
+      </div>
+      <div style="font-size: 1.5rem; color: var(--text-muted);">→</div>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-title">Report a Problem</div>
+        <div class="setting-description">Let us know about issues</div>
+      </div>
+      <div style="font-size: 1.5rem; color: var(--text-muted);">→</div>
+    </div>
+
+    <!-- Danger Zone -->
+    <h3 class="mb-3 mt-4 text-danger">Danger Zone</h3>
+    <button class="btn btn-outline btn-block mb-2" style="border-color: var(--danger-red); color: var(--danger-red);" onclick="clearCache()">
+      🗑️ Clear Cache
+    </button>
+    <button class="btn btn-outline btn-block" style="border-color: var(--danger-red); color: var(--danger-red);" onclick="logout()">
+      🚪 Logout
+    </button>
+
+    <!-- App Info -->
+    <div class="text-center mt-4 mb-4">
+      <p class="text-muted text-small">Gift_x1000 v1.0.0</p>
+      <p class="text-muted text-tiny">© 2024 All rights reserved</p>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <div class="nav-icon">🏠</div>
+      <div class="nav-label">Home</div>
+    </a>
+    <a href="wallet.html" class="nav-item">
+      <div class="nav-icon">💰</div>
+      <div class="nav-label">Wallet</div>
+    </a>
+    <a href="game-history.html" class="nav-item">
+      <div class="nav-icon">📊</div>
+      <div class="nav-label">History</div>
+    </a>
+    <a href="leaderboard.html" class="nav-item">
+      <div class="nav-icon">🏆</div>
+      <div class="nav-label">Leaderboard</div>
+    </a>
+    <a href="profile.html" class="nav-item">
+      <div class="nav-icon">👤</div>
+      <div class="nav-label">Profile</div>
+    </a>
+  </nav>
+
+  <script>
+    function toggleSetting(element) {
+      element.classList.toggle('active');
+      // In a real app, this would save the setting
+    }
+
+    function clearCache() {
+      if (confirm('Are you sure you want to clear the cache? This will remove temporary data.')) {
+        alert('Cache cleared successfully!');
+      }
+    }
+
+    function logout() {
+      if (confirm('Are you sure you want to logout?')) {
+        alert('Logging out...');
+        // In a real app, this would logout and redirect
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game History - Gift_x1000</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .game-item {
+      background: rgba(30, 30, 46, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+      transition: all var(--transition-base);
+    }
+
+    .game-item:hover {
+      background: rgba(30, 30, 46, 0.8);
+      transform: translateX(4px);
+    }
+
+    .game-item.win {
+      border-left: 4px solid var(--success-green);
+    }
+
+    .game-item.loss {
+      border-left: 4px solid var(--danger-red);
+    }
+
+    .versus-section {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      margin: var(--spacing-md) 0;
+    }
+
+    .player-side {
+      flex: 1;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <button class="btn btn-ghost btn-sm" onclick="window.history.back()">← Back</button>
+      <h2 class="header-title mb-0">Game History</h2>
+      <button class="btn btn-ghost btn-sm">🔍</button>
+    </div>
+
+    <!-- Stats Summary -->
+    <div class="stats-grid mb-4">
+      <div class="stat-card">
+        <div class="stat-value">156</div>
+        <div class="stat-label">Total Games</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value text-success">122</div>
+        <div class="stat-label">Won</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value text-danger">34</div>
+        <div class="stat-label">Lost</div>
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="tabs">
+      <button class="tab active" onclick="filterGames('all')">All Games</button>
+      <button class="tab" onclick="filterGames('wins')">Wins</button>
+      <button class="tab" onclick="filterGames('losses')">Losses</button>
+    </div>
+
+    <!-- Game History List -->
+    <ul class="list" style="list-style: none; padding: 0;">
+      <li class="game-item win">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <span class="badge badge-success">Won</span>
+            <span class="text-muted text-small ml-2">Game #GX1000-4829</span>
+          </div>
+          <div class="text-success" style="font-weight: 600;">+49.00 TON</div>
+        </div>
+
+        <div class="versus-section">
+          <div class="player-side">
+            <div class="avatar avatar-sm" style="margin: 0 auto 0.5rem;">JD</div>
+            <div class="text-small" style="font-weight: 600;">You</div>
+            <div class="text-muted text-tiny">🪙 Heads</div>
+          </div>
+          <div style="font-size: 1.25rem; color: var(--text-muted);">VS</div>
+          <div class="player-side">
+            <div class="avatar avatar-sm" style="margin: 0 auto 0.5rem; background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">CR</div>
+            <div class="text-small" style="font-weight: 600;">CryptoRich</div>
+            <div class="text-muted text-tiny">🪙 Tails</div>
+          </div>
+        </div>
+
+        <div class="divider" style="margin: 0.5rem 0;"></div>
+        <div class="flex justify-between items-center text-small">
+          <span class="text-muted">🕐 2 minutes ago</span>
+          <a href="fairness-proof.html" class="btn btn-ghost btn-sm">🔒 Verify</a>
+        </div>
+      </li>
+
+      <li class="game-item loss">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <span class="badge badge-outline">Lost</span>
+            <span class="text-muted text-small ml-2">Game #GX1000-4801</span>
+          </div>
+          <div class="text-danger" style="font-weight: 600;">-25.00 TON</div>
+        </div>
+
+        <div class="versus-section">
+          <div class="player-side">
+            <div class="avatar avatar-sm" style="margin: 0 auto 0.5rem;">JD</div>
+            <div class="text-small" style="font-weight: 600;">You</div>
+            <div class="text-muted text-tiny">🪙 Tails</div>
+          </div>
+          <div style="font-size: 1.25rem; color: var(--text-muted);">VS</div>
+          <div class="player-side">
+            <div class="avatar avatar-sm" style="margin: 0 auto 0.5rem; background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);">LK</div>
+            <div class="text-small" style="font-weight: 600;">LuckyKing</div>
+            <div class="text-muted text-tiny">🪙 Heads</div>
+          </div>
+        </div>
+
+        <div class="divider" style="margin: 0.5rem 0;"></div>
+        <div class="flex justify-between items-center text-small">
+          <span class="text-muted">🕐 3 hours ago</span>
+          <a href="fairness-proof.html" class="btn btn-ghost btn-sm">🔒 Verify</a>
+        </div>
+      </li>
+
+      <li class="game-item win">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <span class="badge badge-success">Won</span>
+            <span class="text-muted text-small ml-2">Game #GX1000-4756</span>
+          </div>
+          <div class="text-success" style="font-weight: 600;">+74.50 TON</div>
+        </div>
+
+        <div class="versus-section">
+          <div class="player-side">
+            <div class="avatar avatar-sm" style="margin: 0 auto 0.5rem;">JD</div>
+            <div class="text-small" style="font-weight: 600;">You</div>
+            <div class="text-muted text-tiny">🪙 Heads</div>
+          </div>
+          <div style="font-size: 1.25rem; color: var(--text-muted);">VS</div>
+          <div class="player-side">
+            <div class="avatar avatar-sm" style="margin: 0 auto 0.5rem; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">BW</div>
+            <div class="text-small" style="font-weight: 600;">BigWhale</div>
+            <div class="text-muted text-tiny">🪙 Tails</div>
+          </div>
+        </div>
+
+        <div class="divider" style="margin: 0.5rem 0;"></div>
+        <div class="flex justify-between items-center text-small">
+          <span class="text-muted">🕐 Yesterday</span>
+          <a href="fairness-proof.html" class="btn btn-ghost btn-sm">🔒 Verify</a>
+        </div>
+      </li>
+
+      <li class="game-item win">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <span class="badge badge-success">Won</span>
+            <span class="text-muted text-small ml-2">Game #GX1000-4732</span>
+          </div>
+          <div class="text-success" style="font-weight: 600;">+24.50 TON</div>
+        </div>
+
+        <div class="versus-section">
+          <div class="player-side">
+            <div class="avatar avatar-sm" style="margin: 0 auto 0.5rem;">JD</div>
+            <div class="text-small" style="font-weight: 600;">You</div>
+            <div class="text-muted text-tiny">🪙 Tails</div>
+          </div>
+          <div style="font-size: 1.25rem; color: var(--text-muted);">VS</div>
+          <div class="player-side">
+            <div class="avatar avatar-sm" style="margin: 0 auto 0.5rem; background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">MP</div>
+            <div class="text-small" style="font-weight: 600;">MoonPlayer</div>
+            <div class="text-muted text-tiny">🪙 Heads</div>
+          </div>
+        </div>
+
+        <div class="divider" style="margin: 0.5rem 0;"></div>
+        <div class="flex justify-between items-center text-small">
+          <span class="text-muted">🕐 2 days ago</span>
+          <a href="fairness-proof.html" class="btn btn-ghost btn-sm">🔒 Verify</a>
+        </div>
+      </li>
+
+      <li class="game-item win">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <span class="badge badge-success">Won</span>
+            <span class="text-muted text-small ml-2">Game #GX1000-4698</span>
+          </div>
+          <div class="text-success" style="font-weight: 600;">+99.00 TON</div>
+        </div>
+
+        <div class="versus-section">
+          <div class="player-side">
+            <div class="avatar avatar-sm" style="margin: 0 auto 0.5rem;">JD</div>
+            <div class="text-small" style="font-weight: 600;">You</div>
+            <div class="text-muted text-tiny">🪙 Heads</div>
+          </div>
+          <div style="font-size: 1.25rem; color: var(--text-muted);">VS</div>
+          <div class="player-side">
+            <div class="avatar avatar-sm" style="margin: 0 auto 0.5rem;">TG</div>
+            <div class="text-small" style="font-weight: 600;">TonGamer</div>
+            <div class="text-muted text-tiny">🪙 Tails</div>
+          </div>
+        </div>
+
+        <div class="divider" style="margin: 0.5rem 0;"></div>
+        <div class="flex justify-between items-center text-small">
+          <span class="text-muted">🕐 3 days ago</span>
+          <a href="fairness-proof.html" class="btn btn-ghost btn-sm">🔒 Verify</a>
+        </div>
+      </li>
+
+      <li class="game-item loss">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <span class="badge badge-outline">Lost</span>
+            <span class="text-muted text-small ml-2">Game #GX1000-4675</span>
+          </div>
+          <div class="text-danger" style="font-weight: 600;">-50.00 TON</div>
+        </div>
+
+        <div class="versus-section">
+          <div class="player-side">
+            <div class="avatar avatar-sm" style="margin: 0 auto 0.5rem;">JD</div>
+            <div class="text-small" style="font-weight: 600;">You</div>
+            <div class="text-muted text-tiny">🪙 Heads</div>
+          </div>
+          <div style="font-size: 1.25rem; color: var(--text-muted);">VS</div>
+          <div class="player-side">
+            <div class="avatar avatar-sm" style="margin: 0 auto 0.5rem; background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);">FP</div>
+            <div class="text-small" style="font-weight: 600;">FlipPro</div>
+            <div class="text-muted text-tiny">🪙 Tails</div>
+          </div>
+        </div>
+
+        <div class="divider" style="margin: 0.5rem 0;"></div>
+        <div class="flex justify-between items-center text-small">
+          <span class="text-muted">🕐 4 days ago</span>
+          <a href="fairness-proof.html" class="btn btn-ghost btn-sm">🔒 Verify</a>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Load More Button -->
+    <button class="btn btn-outline btn-block mt-3">
+      Load More Games
+    </button>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <div class="nav-icon">🏠</div>
+      <div class="nav-label">Home</div>
+    </a>
+    <a href="wallet.html" class="nav-item">
+      <div class="nav-icon">💰</div>
+      <div class="nav-label">Wallet</div>
+    </a>
+    <a href="game-history.html" class="nav-item active">
+      <div class="nav-icon">📊</div>
+      <div class="nav-label">History</div>
+    </a>
+    <a href="leaderboard.html" class="nav-item">
+      <div class="nav-icon">🏆</div>
+      <div class="nav-label">Leaderboard</div>
+    </a>
+    <a href="profile.html" class="nav-item">
+      <div class="nav-icon">👤</div>
+      <div class="nav-label">Profile</div>
+    </a>
+  </nav>
+
+  <script>
+    function filterGames(type) {
+      // Update active tab
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      event.target.classList.add('active');
+
+      // In a real app, this would filter the games list
+      console.log('Filtering by:', type);
+    }
+  </script>
+</body>
+</html>

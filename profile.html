@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - Gift_x1000</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .profile-header {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .level-badge {
+      display: inline-block;
+      background: var(--gradient-primary);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      margin-top: var(--spacing-md);
+    }
+
+    .achievement-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .achievement-badge {
+      aspect-ratio: 1;
+      background: rgba(30, 30, 46, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      transition: all var(--transition-base);
+    }
+
+    .achievement-badge:hover {
+      transform: scale(1.05);
+      background: rgba(30, 30, 46, 0.9);
+    }
+
+    .achievement-badge.locked {
+      opacity: 0.3;
+      filter: grayscale(100%);
+    }
+
+    .achievement-label {
+      font-size: 0.625rem;
+      margin-top: 0.25rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h2 class="header-title mb-0">Profile</h2>
+      <div class="header-actions">
+        <button class="btn btn-ghost btn-sm" onclick="window.location.href='settings.html'">⚙️</button>
+      </div>
+    </div>
+
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <div class="avatar avatar-lg" style="margin: 0 auto var(--spacing-md);">JD</div>
+      <h2 class="mb-1">JohnDoe</h2>
+      <p class="text-muted mb-0">@johndoe • Member since Jan 2024</p>
+      <div class="level-badge">Level 24 🌟</div>
+    </div>
+
+    <!-- Statistics Dashboard -->
+    <div class="glass-card mb-4">
+      <h3 class="mb-3">Statistics</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">156</div>
+          <div class="stat-label">Total Games</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value text-success">78%</div>
+          <div class="stat-label">Win Rate</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-secondary">Total Wagered</span>
+        <span style="font-weight: 600;">2,450 TON</span>
+      </div>
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-secondary">Total Won</span>
+        <span class="text-success" style="font-weight: 600;">+1,893 TON</span>
+      </div>
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-secondary">Total Lost</span>
+        <span class="text-danger" style="font-weight: 600;">-557 TON</span>
+      </div>
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-secondary">Biggest Win</span>
+        <span class="text-success" style="font-weight: 600;">+250 TON</span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-secondary">Current Streak</span>
+        <span style="font-weight: 600;">🔥 7 Wins</span>
+      </div>
+    </div>
+
+    <!-- Win/Loss Chart -->
+    <div class="glass-card mb-4">
+      <h3 class="mb-3">Performance Overview</h3>
+      <div class="flex gap-2 mb-2">
+        <div style="flex: 78; background: var(--gradient-success); height: 40px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-weight: 600;">
+          122 Wins (78%)
+        </div>
+        <div style="flex: 22; background: var(--gradient-warning); height: 40px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-weight: 600;">
+          34 (22%)
+        </div>
+      </div>
+      <div class="text-center text-muted text-small">Win vs Loss Distribution</div>
+    </div>
+
+    <!-- Achievements -->
+    <div class="glass-card mb-4">
+      <div class="flex justify-between items-center mb-3">
+        <h3 class="mb-0">Achievements</h3>
+        <span class="badge badge-primary">12/20</span>
+      </div>
+
+      <div class="achievement-grid">
+        <div class="achievement-badge" title="First Win">
+          <div>🎯</div>
+          <div class="achievement-label">First Win</div>
+        </div>
+        <div class="achievement-badge" title="10 Wins">
+          <div>🔥</div>
+          <div class="achievement-label">Hot Streak</div>
+        </div>
+        <div class="achievement-badge" title="100 Games">
+          <div>💯</div>
+          <div class="achievement-label">Century</div>
+        </div>
+        <div class="achievement-badge" title="Big Winner">
+          <div>💎</div>
+          <div class="achievement-label">Big Win</div>
+        </div>
+        <div class="achievement-badge" title="Lucky Seven">
+          <div>🍀</div>
+          <div class="achievement-label">Lucky 7</div>
+        </div>
+        <div class="achievement-badge" title="High Roller">
+          <div>👑</div>
+          <div class="achievement-label">High Roller</div>
+        </div>
+        <div class="achievement-badge" title="Consistent Player">
+          <div>⭐</div>
+          <div class="achievement-label">Consistent</div>
+        </div>
+        <div class="achievement-badge" title="Marathon">
+          <div>🏃</div>
+          <div class="achievement-label">Marathon</div>
+        </div>
+        <div class="achievement-badge locked" title="Locked">
+          <div>🔒</div>
+          <div class="achievement-label">Locked</div>
+        </div>
+        <div class="achievement-badge locked" title="Locked">
+          <div>🔒</div>
+          <div class="achievement-label">Locked</div>
+        </div>
+        <div class="achievement-badge locked" title="Locked">
+          <div>🔒</div>
+          <div class="achievement-label">Locked</div>
+        </div>
+        <div class="achievement-badge locked" title="Locked">
+          <div>🔒</div>
+          <div class="achievement-label">Locked</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="glass-card">
+      <h3 class="mb-3">Quick Actions</h3>
+      <button class="btn btn-outline btn-block mb-2" onclick="window.location.href='game-history.html'">
+        📊 View Game History
+      </button>
+      <button class="btn btn-outline btn-block mb-2" onclick="window.location.href='wallet.html'">
+        💰 Manage Wallet
+      </button>
+      <button class="btn btn-outline btn-block mb-2" onclick="window.location.href='settings.html'">
+        ⚙️ Settings
+      </button>
+      <button class="btn btn-outline btn-block" onclick="window.location.href='how-to-play.html'">
+        ❓ How to Play
+      </button>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <div class="nav-icon">🏠</div>
+      <div class="nav-label">Home</div>
+    </a>
+    <a href="wallet.html" class="nav-item">
+      <div class="nav-icon">💰</div>
+      <div class="nav-label">Wallet</div>
+    </a>
+    <a href="game-history.html" class="nav-item">
+      <div class="nav-icon">📊</div>
+      <div class="nav-label">History</div>
+    </a>
+    <a href="leaderboard.html" class="nav-item">
+      <div class="nav-icon">🏆</div>
+      <div class="nav-label">Leaderboard</div>
+    </a>
+    <a href="profile.html" class="nav-item active">
+      <div class="nav-icon">👤</div>
+      <div class="nav-label">Profile</div>
+    </a>
+  </nav>
+</body>
+</html>

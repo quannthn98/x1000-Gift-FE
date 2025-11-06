@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Game - Gift_x1000</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <button class="btn btn-ghost btn-sm" onclick="window.history.back()">← Back</button>
+      <h2 class="header-title mb-0">Create Game</h2>
+      <div style="width: 60px;"></div>
+    </div>
+
+    <!-- Current Balance Card -->
+    <div class="glass-card mb-4">
+      <div class="text-muted text-small mb-1">Current Balance</div>
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="mb-0">1,250.00 <span style="font-size: 1rem; color: var(--text-secondary);">TON</span></h2>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="window.location.href='deposit.html'">+ Deposit</button>
+      </div>
+    </div>
+
+    <!-- Bet Amount Input -->
+    <div class="glass-card mb-4">
+      <div class="input-group">
+        <label class="input-label">Bet Amount (TON)</label>
+        <input type="number" class="input" placeholder="Enter amount" value="50" min="1" step="0.1" id="betAmount">
+      </div>
+
+      <!-- Quick Amount Buttons -->
+      <div class="flex gap-2 mb-2">
+        <button class="btn btn-ghost btn-sm" style="flex: 1;" onclick="setBetAmount(10)">10 TON</button>
+        <button class="btn btn-ghost btn-sm" style="flex: 1;" onclick="setBetAmount(50)">50 TON</button>
+        <button class="btn btn-ghost btn-sm" style="flex: 1;" onclick="setBetAmount(100)">100 TON</button>
+      </div>
+      <button class="btn btn-outline btn-sm btn-block" onclick="setBetAmount(1250)">Max: 1,250 TON</button>
+    </div>
+
+    <!-- Choose Your Side -->
+    <div class="glass-card mb-4">
+      <label class="input-label">Choose Your Side</label>
+      <div class="flex gap-3">
+        <button class="btn btn-primary" style="flex: 1; font-size: 1.25rem;" id="headsBtn" onclick="selectSide('heads')">
+          🪙 Heads
+        </button>
+        <button class="btn btn-outline" style="flex: 1; font-size: 1.25rem;" id="tailsBtn" onclick="selectSide('tails')">
+          🪙 Tails
+        </button>
+      </div>
+    </div>
+
+    <!-- Room Privacy -->
+    <div class="glass-card mb-4">
+      <label class="input-label">Room Privacy</label>
+      <div class="flex gap-3">
+        <button class="btn btn-primary" style="flex: 1;" id="publicBtn" onclick="selectPrivacy('public')">
+          🌐 Public
+        </button>
+        <button class="btn btn-outline" style="flex: 1;" id="privateBtn" onclick="selectPrivacy('private')">
+          🔒 Private
+        </button>
+      </div>
+      <p class="text-muted text-small mt-2 mb-0">Private rooms require a direct link to join</p>
+    </div>
+
+    <!-- Fee Information -->
+    <div class="glass-card mb-4">
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-secondary">Potential Win</span>
+        <span class="text-success" style="font-weight: 600; font-size: 1.125rem;">+50.00 TON</span>
+      </div>
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-secondary">Platform Fee (2%)</span>
+        <span class="text-warning">-1.00 TON</span>
+      </div>
+      <div class="divider"></div>
+      <div class="flex justify-between items-center">
+        <span style="font-weight: 600;">Net Win if Successful</span>
+        <span class="text-success" style="font-weight: 700; font-size: 1.25rem;">+49.00 TON</span>
+      </div>
+    </div>
+
+    <!-- Create Room Button -->
+    <button class="btn btn-primary btn-lg btn-block" onclick="createGame()">
+      Create Game Room 🎲
+    </button>
+
+    <!-- Terms -->
+    <p class="text-muted text-small text-center mt-3">
+      By creating a game, you agree to our <a href="#" style="color: var(--primary-blue);">Terms of Service</a> and <a href="#" style="color: var(--primary-blue);">Fair Play Policy</a>
+    </p>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <div class="nav-icon">🏠</div>
+      <div class="nav-label">Home</div>
+    </a>
+    <a href="wallet.html" class="nav-item">
+      <div class="nav-icon">💰</div>
+      <div class="nav-label">Wallet</div>
+    </a>
+    <a href="game-history.html" class="nav-item">
+      <div class="nav-icon">📊</div>
+      <div class="nav-label">History</div>
+    </a>
+    <a href="leaderboard.html" class="nav-item">
+      <div class="nav-icon">🏆</div>
+      <div class="nav-label">Leaderboard</div>
+    </a>
+    <a href="profile.html" class="nav-item">
+      <div class="nav-icon">👤</div>
+      <div class="nav-label">Profile</div>
+    </a>
+  </nav>
+
+  <script>
+    let selectedSide = 'heads';
+    let selectedPrivacy = 'public';
+
+    function setBetAmount(amount) {
+      document.getElementById('betAmount').value = amount;
+      updateFees();
+    }
+
+    function selectSide(side) {
+      selectedSide = side;
+      const headsBtn = document.getElementById('headsBtn');
+      const tailsBtn = document.getElementById('tailsBtn');
+
+      if (side === 'heads') {
+        headsBtn.className = 'btn btn-primary';
+        tailsBtn.className = 'btn btn-outline';
+      } else {
+        headsBtn.className = 'btn btn-outline';
+        tailsBtn.className = 'btn btn-primary';
+      }
+    }
+
+    function selectPrivacy(privacy) {
+      selectedPrivacy = privacy;
+      const publicBtn = document.getElementById('publicBtn');
+      const privateBtn = document.getElementById('privateBtn');
+
+      if (privacy === 'public') {
+        publicBtn.className = 'btn btn-primary';
+        privateBtn.className = 'btn btn-outline';
+      } else {
+        publicBtn.className = 'btn btn-outline';
+        privateBtn.className = 'btn btn-primary';
+      }
+    }
+
+    function updateFees() {
+      // This would calculate fees based on bet amount
+      // Placeholder for now
+    }
+
+    function createGame() {
+      const betAmount = document.getElementById('betAmount').value;
+      if (!betAmount || betAmount <= 0) {
+        alert('Please enter a valid bet amount');
+        return;
+      }
+      // In a real app, this would create the game and redirect
+      alert(`Creating ${selectedPrivacy} game room!\nBet: ${betAmount} TON\nYour side: ${selectedSide}`);
+      window.location.href = 'game-room.html';
+    }
+
+    // Initialize
+    document.getElementById('betAmount').addEventListener('input', updateFees);
+  </script>
+</body>
+</html>

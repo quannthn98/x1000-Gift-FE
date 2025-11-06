@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | Gift_x1000</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .error-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+      text-align: center;
+      padding: var(--spacing-xl);
+    }
+
+    .error-code {
+      font-size: 8rem;
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: var(--spacing-md);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .error-icon {
+      font-size: 6rem;
+      margin-bottom: var(--spacing-lg);
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="error-container">
+      <div class="error-icon">🎲</div>
+      <div class="error-code">404</div>
+      <h2 class="mb-2">Oops! Page Not Found</h2>
+      <p class="text-secondary mb-4" style="max-width: 400px;">
+        Looks like this coin flip landed outside the game! The page you're looking for doesn't exist or has been moved.
+      </p>
+
+      <!-- Quick Navigation -->
+      <div style="max-width: 400px; width: 100%;">
+        <button class="btn btn-primary btn-block mb-2" onclick="window.location.href='index.html'">
+          🏠 Go to Home
+        </button>
+        <button class="btn btn-outline btn-block mb-2" onclick="window.history.back()">
+          ← Go Back
+        </button>
+      </div>
+
+      <!-- Popular Pages -->
+      <div class="glass-card mt-4" style="max-width: 400px; width: 100%;">
+        <h3 class="mb-3">Popular Pages</h3>
+        <div style="display: grid; gap: var(--spacing-sm);">
+          <button class="btn btn-ghost btn-sm" onclick="window.location.href='create-game.html'">
+            🎮 Create Game
+          </button>
+          <button class="btn btn-ghost btn-sm" onclick="window.location.href='wallet.html'">
+            💰 Wallet
+          </button>
+          <button class="btn btn-ghost btn-sm" onclick="window.location.href='leaderboard.html'">
+            🏆 Leaderboard
+          </button>
+          <button class="btn btn-ghost btn-sm" onclick="window.location.href='how-to-play.html'">
+            ❓ How to Play
+          </button>
+        </div>
+      </div>
+
+      <!-- Support -->
+      <div class="mt-4">
+        <p class="text-muted text-small">Need help?</p>
+        <button class="btn btn-outline btn-sm" onclick="window.location.href='settings.html'">
+          💬 Contact Support
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <div class="nav-icon">🏠</div>
+      <div class="nav-label">Home</div>
+    </a>
+    <a href="wallet.html" class="nav-item">
+      <div class="nav-icon">💰</div>
+      <div class="nav-label">Wallet</div>
+    </a>
+    <a href="game-history.html" class="nav-item">
+      <div class="nav-icon">📊</div>
+      <div class="nav-label">History</div>
+    </a>
+    <a href="leaderboard.html" class="nav-item">
+      <div class="nav-icon">🏆</div>
+      <div class="nav-label">Leaderboard</div>
+    </a>
+    <a href="profile.html" class="nav-item">
+      <div class="nav-icon">👤</div>
+      <div class="nav-label">Profile</div>
+    </a>
+  </nav>
+</body>
+</html>

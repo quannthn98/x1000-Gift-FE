@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deposit TON - Gift_x1000</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .qr-code-large {
+      width: 280px;
+      height: 280px;
+      background: white;
+      border-radius: var(--radius-xl);
+      margin: var(--spacing-xl) auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .address-display {
+      background: rgba(30, 30, 46, 0.8);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-lg) 0;
+      text-align: center;
+      position: relative;
+    }
+
+    .address-text {
+      font-family: monospace;
+      font-size: 0.875rem;
+      word-break: break-all;
+      margin-bottom: var(--spacing-md);
+      color: var(--text-primary);
+    }
+
+    .status-step {
+      background: rgba(30, 30, 46, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-md);
+      margin-bottom: var(--spacing-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+
+    .status-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .status-icon.pending {
+      background: rgba(251, 146, 60, 0.2);
+      color: var(--warning-orange);
+    }
+
+    .status-icon.completed {
+      background: rgba(74, 222, 128, 0.2);
+      color: var(--success-green);
+    }
+
+    .status-icon.waiting {
+      background: rgba(160, 174, 192, 0.2);
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <button class="btn btn-ghost btn-sm" onclick="window.location.href='wallet.html'">← Back</button>
+      <h2 class="header-title mb-0">Deposit TON</h2>
+      <div style="width: 60px;"></div>
+    </div>
+
+    <!-- Current Balance -->
+    <div class="glass-card mb-4">
+      <div class="text-muted text-small mb-1">Current Balance</div>
+      <h2 class="mb-0">1,250.00 <span style="font-size: 1rem; color: var(--text-secondary);">TON</span></h2>
+    </div>
+
+    <!-- QR Code -->
+    <div class="glass-card text-center mb-4">
+      <h3 class="mb-2">Scan QR Code</h3>
+      <p class="text-muted text-small mb-3">
+        Scan this QR code with your TON wallet to deposit
+      </p>
+
+      <div class="qr-code-large">
+        <div style="text-align: center; color: #333;">
+          <div style="font-size: 4rem; margin-bottom: 0.5rem;">📱</div>
+          <div style="font-weight: 600;">QR Code</div>
+          <div style="font-size: 0.875rem; margin-top: 0.25rem;">Scan with TON Wallet</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deposit Address -->
+    <div class="glass-card mb-4">
+      <h3 class="mb-3">Or Copy Address</h3>
+      <div class="address-display">
+        <div class="text-muted text-small mb-2">Your Deposit Address</div>
+        <div class="address-text" id="depositAddress">
+          UQC7xVJvr8kCWMXqJ9pW4qK7L5mN8oP2qR3sT4uV5wX6yZ7a8b9c0d1e2f3g4h5i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z3a4b5c6d7e8f9g0h1i2j3k4l5m6n7o8p9
+        </div>
+        <button class="btn btn-primary btn-sm btn-block" onclick="copyAddress()">
+          📋 Copy Address
+        </button>
+      </div>
+    </div>
+
+    <!-- Important Information -->
+    <div class="glass-card mb-4">
+      <h3 class="mb-3">⚠️ Important Information</h3>
+
+      <div style="background: rgba(251, 146, 60, 0.1); border-left: 4px solid var(--warning-orange); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-md);">
+        <div style="font-weight: 600; margin-bottom: 0.5rem;">Minimum Deposit</div>
+        <div class="text-secondary text-small">
+          The minimum deposit amount is <strong>1 TON</strong>. Deposits below this amount will not be credited.
+        </div>
+      </div>
+
+      <div style="background: rgba(74, 222, 128, 0.1); border-left: 4px solid var(--success-green); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-md);">
+        <div style="font-weight: 600; margin-bottom: 0.5rem;">Network Confirmations</div>
+        <div class="text-secondary text-small">
+          Your deposit will be credited after <strong>3 network confirmations</strong> (usually 1-2 minutes).
+        </div>
+      </div>
+
+      <div style="background: rgba(36, 129, 204, 0.1); border-left: 4px solid var(--primary-blue); border-radius: var(--radius-md); padding: var(--spacing-md);">
+        <div style="font-weight: 600; margin-bottom: 0.5rem;">TON Network Only</div>
+        <div class="text-secondary text-small">
+          Only send <strong>TON</strong> to this address. Sending other cryptocurrencies may result in permanent loss.
+        </div>
+      </div>
+    </div>
+
+    <!-- Transaction Status Tracker -->
+    <div class="glass-card mb-4">
+      <h3 class="mb-3">Transaction Status</h3>
+
+      <div class="status-step">
+        <div class="status-icon waiting">1</div>
+        <div style="flex: 1;">
+          <div style="font-weight: 600; margin-bottom: 0.25rem;">Awaiting Transaction</div>
+          <div class="text-muted text-small">Send TON to the address above</div>
+        </div>
+      </div>
+
+      <div class="status-step">
+        <div class="status-icon waiting">2</div>
+        <div style="flex: 1;">
+          <div style="font-weight: 600; margin-bottom: 0.25rem;">Transaction Detected</div>
+          <div class="text-muted text-small">We'll detect your transaction on the blockchain</div>
+        </div>
+      </div>
+
+      <div class="status-step">
+        <div class="status-icon waiting">3</div>
+        <div style="flex: 1;">
+          <div style="font-weight: 600; margin-bottom: 0.25rem;">Confirming</div>
+          <div class="text-muted text-small">Waiting for network confirmations (3 blocks)</div>
+        </div>
+      </div>
+
+      <div class="status-step">
+        <div class="status-icon waiting">4</div>
+        <div style="flex: 1;">
+          <div style="font-weight: 600; margin-bottom: 0.25rem;">Completed</div>
+          <div class="text-muted text-small">Funds will be credited to your account</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="glass-card">
+      <h3 class="mb-3">How to Deposit</h3>
+      <ol style="color: var(--text-secondary); font-size: 0.875rem; margin-left: 1.5rem;">
+        <li style="margin-bottom: var(--spacing-md);">
+          <strong>Copy the deposit address</strong> or scan the QR code with your TON wallet
+        </li>
+        <li style="margin-bottom: var(--spacing-md);">
+          <strong>Send TON</strong> from your wallet to this address (minimum 1 TON)
+        </li>
+        <li style="margin-bottom: var(--spacing-md);">
+          <strong>Wait for confirmations</strong> (usually 1-2 minutes)
+        </li>
+        <li>
+          <strong>Start playing!</strong> Your balance will update automatically
+        </li>
+      </ol>
+    </div>
+
+    <!-- Need Help -->
+    <div class="text-center mt-4">
+      <p class="text-muted text-small mb-2">Need help?</p>
+      <button class="btn btn-outline btn-sm" onclick="window.location.href='how-to-play.html'">
+        ❓ View Tutorial
+      </button>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <div class="nav-icon">🏠</div>
+      <div class="nav-label">Home</div>
+    </a>
+    <a href="wallet.html" class="nav-item active">
+      <div class="nav-icon">💰</div>
+      <div class="nav-label">Wallet</div>
+    </a>
+    <a href="game-history.html" class="nav-item">
+      <div class="nav-icon">📊</div>
+      <div class="nav-label">History</div>
+    </a>
+    <a href="leaderboard.html" class="nav-item">
+      <div class="nav-icon">🏆</div>
+      <div class="nav-label">Leaderboard</div>
+    </a>
+    <a href="profile.html" class="nav-item">
+      <div class="nav-icon">👤</div>
+      <div class="nav-label">Profile</div>
+    </a>
+  </nav>
+
+  <script>
+    function copyAddress() {
+      const address = document.getElementById('depositAddress').textContent.trim();
+      navigator.clipboard.writeText(address).then(() => {
+        alert('✅ Address copied to clipboard!');
+      }).catch(() => {
+        alert('❌ Failed to copy address');
+      });
+    }
+
+    // Simulate transaction detection (for demo purposes)
+    // In a real app, this would poll the blockchain
+    setTimeout(() => {
+      // Update status icons to show progress
+      console.log('Checking for transactions...');
+    }, 5000);
+  </script>
+</body>
+</html>

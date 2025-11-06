@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fairness Proof - Gift_x1000</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .seed-box {
+      background: rgba(30, 30, 46, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+      font-family: monospace;
+      font-size: 0.875rem;
+      word-break: break-all;
+    }
+
+    .verification-result {
+      background: var(--gradient-success);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      text-align: center;
+      margin: var(--spacing-xl) 0;
+    }
+
+    .how-it-works {
+      background: rgba(30, 30, 46, 0.4);
+      border-left: 4px solid var(--primary-blue);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+      margin-top: var(--spacing-lg);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <button class="btn btn-ghost btn-sm" onclick="window.history.back()">← Back</button>
+      <h2 class="header-title mb-0">Fairness Proof</h2>
+      <button class="btn btn-ghost btn-sm">ℹ️</button>
+    </div>
+
+    <!-- What is Provably Fair -->
+    <div class="glass-card mb-4">
+      <h3 class="mb-2">🔒 Provably Fair Gaming</h3>
+      <p class="text-secondary mb-0">
+        Our provably fair system ensures that every game outcome is random and cannot be manipulated by anyone. You can verify the fairness of any game using cryptographic proof.
+      </p>
+    </div>
+
+    <!-- Game Lookup -->
+    <div class="glass-card mb-4">
+      <h3 class="mb-3">Verify a Game</h3>
+      <div class="input-group">
+        <label class="input-label">Game ID</label>
+        <input type="text" class="input" placeholder="Enter Game ID (e.g., GX1000-4829)" id="gameId" value="GX1000-4829">
+      </div>
+      <button class="btn btn-primary btn-block" onclick="verifyGame()">
+        Verify Game Result
+      </button>
+    </div>
+
+    <!-- Verification Details -->
+    <div class="glass-card mb-4" id="verificationDetails">
+      <h3 class="mb-3">Game Details</h3>
+
+      <div class="mb-3">
+        <label class="input-label">Server Seed (Hashed)</label>
+        <div class="seed-box">
+          sha256: 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="input-label">Client Seed</label>
+        <div class="seed-box">
+          c7a8f9b2e4d6a1f3b5c8e9d4a7f2b6c1e8d5a9f3b7c2e6d1a4f8b5c9e2d7a3f6
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="input-label">Nonce</label>
+        <div class="seed-box">
+          4829
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="input-label">Combined Hash</label>
+        <div class="seed-box">
+          8f3b9d7e2a5c1f6b4d8e9a3c7f2b5d1e6a9c4f8b2d7e5a1c6f3b9d8e4a7c2f5
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-secondary">Result Hash Value</span>
+        <span style="font-weight: 600; font-family: monospace;">0x3B7E...</span>
+      </div>
+
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-secondary">Converted to Range [0-1]</span>
+        <span style="font-weight: 600; font-family: monospace;">0.4582</span>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <span class="text-secondary">Final Outcome</span>
+        <span style="font-weight: 600; font-size: 1.125rem;">🪙 Heads</span>
+      </div>
+    </div>
+
+    <!-- Verification Result -->
+    <div class="verification-result">
+      <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">✅</div>
+      <h2 style="margin-bottom: var(--spacing-sm);">Verified!</h2>
+      <p style="margin-bottom: 0; opacity: 0.9;">
+        This game result has been cryptographically verified and is provably fair.
+      </p>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="glass-card">
+      <h3 class="mb-3">How It Works</h3>
+
+      <div class="how-it-works mb-3">
+        <h4 style="margin-bottom: var(--spacing-sm);">1. Server Seed Generation</h4>
+        <p class="text-secondary text-small mb-0">
+          Before the game starts, the server generates a random seed and shares its hash with you. The actual seed remains hidden until after the game.
+        </p>
+      </div>
+
+      <div class="how-it-works mb-3">
+        <h4 style="margin-bottom: var(--spacing-sm);">2. Client Seed</h4>
+        <p class="text-secondary text-small mb-0">
+          Your device generates a random client seed that contributes to the final outcome. This ensures the server cannot predict or manipulate the result.
+        </p>
+      </div>
+
+      <div class="how-it-works mb-3">
+        <h4 style="margin-bottom: var(--spacing-sm);">3. Nonce</h4>
+        <p class="text-secondary text-small mb-0">
+          A unique number (nonce) is assigned to each game to ensure every result is unique, even with the same seeds.
+        </p>
+      </div>
+
+      <div class="how-it-works mb-3">
+        <h4 style="margin-bottom: var(--spacing-sm);">4. Result Calculation</h4>
+        <p class="text-secondary text-small mb-0">
+          The server seed, client seed, and nonce are combined and hashed using SHA-256. This hash is converted to determine the game outcome (Heads or Tails).
+        </p>
+      </div>
+
+      <div class="how-it-works">
+        <h4 style="margin-bottom: var(--spacing-sm);">5. Verification</h4>
+        <p class="text-secondary text-small mb-0">
+          After the game, the server reveals the original seed. You can verify that the hash matches and recalculate the result yourself to confirm fairness.
+        </p>
+      </div>
+    </div>
+
+    <!-- Manual Verification -->
+    <div class="glass-card mt-4">
+      <h3 class="mb-3">Manual Verification</h3>
+      <p class="text-secondary text-small mb-3">
+        Want to verify the result yourself? Use any SHA-256 calculator and follow these steps:
+      </p>
+      <ol style="color: var(--text-secondary); font-size: 0.875rem; margin-left: 1.5rem;">
+        <li style="margin-bottom: 0.5rem;">Concatenate: ServerSeed + ClientSeed + Nonce</li>
+        <li style="margin-bottom: 0.5rem;">Calculate SHA-256 hash of the concatenated string</li>
+        <li style="margin-bottom: 0.5rem;">Convert first 8 characters of hash to decimal</li>
+        <li style="margin-bottom: 0.5rem;">Divide by 0xFFFFFFFF to get value between 0-1</li>
+        <li>If value < 0.5: Heads, else: Tails</li>
+      </ol>
+    </div>
+
+    <!-- External Verification Tools -->
+    <div class="text-center mt-4">
+      <p class="text-muted text-small mb-2">Use external tools to verify:</p>
+      <button class="btn btn-outline btn-sm">
+        🔗 SHA-256 Calculator
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function verifyGame() {
+      const gameId = document.getElementById('gameId').value;
+      if (!gameId) {
+        alert('Please enter a Game ID');
+        return;
+      }
+      // In a real app, this would fetch and verify the game
+      console.log('Verifying game:', gameId);
+      // Show verification details (already visible for demo)
+      document.getElementById('verificationDetails').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

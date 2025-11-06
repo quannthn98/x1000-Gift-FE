@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Withdraw TON - Gift_x1000</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .fee-breakdown {
+      background: rgba(30, 30, 46, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+
+    .fee-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: var(--spacing-sm);
+      font-size: 0.875rem;
+    }
+
+    .fee-row:last-child {
+      margin-bottom: 0;
+      padding-top: var(--spacing-sm);
+      border-top: 1px solid var(--border-color);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <button class="btn btn-ghost btn-sm" onclick="window.location.href='wallet.html'">← Back</button>
+      <h2 class="header-title mb-0">Withdraw TON</h2>
+      <div style="width: 60px;"></div>
+    </div>
+
+    <!-- Available Balance -->
+    <div class="glass-card mb-4">
+      <div class="text-muted text-small mb-1">Available Balance</div>
+      <div class="flex items-center justify-between">
+        <h2 class="mb-0">1,250.00 <span style="font-size: 1rem; color: var(--text-secondary);">TON</span></h2>
+        <span class="badge badge-success">Ready</span>
+      </div>
+    </div>
+
+    <!-- Withdrawal Form -->
+    <div class="glass-card mb-4">
+      <h3 class="mb-3">Withdrawal Details</h3>
+
+      <!-- Amount Input -->
+      <div class="input-group">
+        <label class="input-label">Amount (TON)</label>
+        <input type="number" class="input" placeholder="Enter amount to withdraw" id="withdrawAmount" value="" min="10" step="0.1" oninput="calculateFees()">
+      </div>
+
+      <!-- Quick Amount Buttons -->
+      <div class="flex gap-2 mb-3">
+        <button class="btn btn-ghost btn-sm" style="flex: 1;" onclick="setWithdrawAmount(100)">100 TON</button>
+        <button class="btn btn-ghost btn-sm" style="flex: 1;" onclick="setWithdrawAmount(500)">500 TON</button>
+        <button class="btn btn-ghost btn-sm" style="flex: 1;" onclick="setWithdrawAmount(1250)">Max</button>
+      </div>
+
+      <!-- Destination Address -->
+      <div class="input-group">
+        <label class="input-label">Destination Address</label>
+        <input type="text" class="input" placeholder="Enter TON wallet address" id="destinationAddress">
+      </div>
+
+      <!-- Fee Breakdown -->
+      <div class="fee-breakdown">
+        <div class="fee-row">
+          <span class="text-secondary">Withdrawal Amount</span>
+          <span id="feeAmount">0.00 TON</span>
+        </div>
+        <div class="fee-row">
+          <span class="text-secondary">Network Fee</span>
+          <span id="feeNetwork" class="text-warning">-0.50 TON</span>
+        </div>
+        <div class="fee-row">
+          <span class="text-secondary">Processing Fee (1%)</span>
+          <span id="feeProcessing" class="text-warning">-0.00 TON</span>
+        </div>
+        <div class="fee-row">
+          <span>You Will Receive</span>
+          <span id="feeTotal" class="text-success">0.00 TON</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Important Information -->
+    <div class="glass-card mb-4">
+      <h3 class="mb-3">⚠️ Important Information</h3>
+
+      <div style="background: rgba(251, 146, 60, 0.1); border-left: 4px solid var(--warning-orange); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-md);">
+        <div style="font-weight: 600; margin-bottom: 0.5rem;">Minimum Withdrawal</div>
+        <div class="text-secondary text-small">
+          The minimum withdrawal amount is <strong>10 TON</strong> (excluding fees).
+        </div>
+      </div>
+
+      <div style="background: rgba(251, 146, 60, 0.1); border-left: 4px solid var(--warning-orange); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-md);">
+        <div style="font-weight: 600; margin-bottom: 0.5rem;">Maximum Withdrawal</div>
+        <div class="text-secondary text-small">
+          The maximum withdrawal amount per transaction is <strong>10,000 TON</strong>.
+        </div>
+      </div>
+
+      <div style="background: rgba(74, 222, 128, 0.1); border-left: 4px solid var(--success-green); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-md);">
+        <div style="font-weight: 600; margin-bottom: 0.5rem;">Processing Time</div>
+        <div class="text-secondary text-small">
+          Withdrawals are typically processed within <strong>5-15 minutes</strong> after approval.
+        </div>
+      </div>
+
+      <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid var(--danger-red); border-radius: var(--radius-md); padding: var(--spacing-md);">
+        <div style="font-weight: 600; margin-bottom: 0.5rem;">Double-Check Address</div>
+        <div class="text-secondary text-small">
+          Make sure the destination address is correct. <strong>Withdrawals cannot be reversed</strong> once processed.
+        </div>
+      </div>
+    </div>
+
+    <!-- Security Notice -->
+    <div class="glass-card mb-4">
+      <div class="flex items-center gap-3 mb-3">
+        <div style="font-size: 2rem;">🔒</div>
+        <div>
+          <h4 class="mb-1">Security Verification</h4>
+          <p class="text-muted text-small mb-0">You may be asked to verify your identity for large withdrawals</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Withdraw Button -->
+    <button class="btn btn-primary btn-lg btn-block" onclick="confirmWithdrawal()">
+      Confirm Withdrawal 💸
+    </button>
+
+    <!-- Cancel Button -->
+    <button class="btn btn-outline btn-block mt-2" onclick="window.location.href='wallet.html'">
+      Cancel
+    </button>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <div class="nav-icon">🏠</div>
+      <div class="nav-label">Home</div>
+    </a>
+    <a href="wallet.html" class="nav-item active">
+      <div class="nav-icon">💰</div>
+      <div class="nav-label">Wallet</div>
+    </a>
+    <a href="game-history.html" class="nav-item">
+      <div class="nav-icon">📊</div>
+      <div class="nav-label">History</div>
+    </a>
+    <a href="leaderboard.html" class="nav-item">
+      <div class="nav-icon">🏆</div>
+      <div class="nav-label">Leaderboard</div>
+    </a>
+    <a href="profile.html" class="nav-item">
+      <div class="nav-icon">👤</div>
+      <div class="nav-label">Profile</div>
+    </a>
+  </nav>
+
+  <!-- Confirmation Modal (hidden by default) -->
+  <div class="modal-overlay" style="display: none;" id="confirmModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title">Confirm Withdrawal</h2>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: var(--spacing-md);">Please review your withdrawal details:</p>
+        <div class="glass-card" style="background: rgba(30, 30, 46, 0.6); padding: var(--spacing-md); margin-bottom: var(--spacing-md);">
+          <div class="fee-row">
+            <span class="text-secondary">Amount</span>
+            <span id="confirmAmount">0.00 TON</span>
+          </div>
+          <div class="fee-row">
+            <span class="text-secondary">To Address</span>
+            <span id="confirmAddress" style="font-family: monospace; font-size: 0.75rem;">---</span>
+          </div>
+          <div class="fee-row">
+            <span class="text-secondary">Total Fees</span>
+            <span id="confirmFees" class="text-warning">0.00 TON</span>
+          </div>
+          <div class="fee-row" style="padding-top: var(--spacing-sm); border-top: 1px solid var(--border-color); margin-top: var(--spacing-sm);">
+            <span style="font-weight: 600;">You Will Receive</span>
+            <span id="confirmTotal" class="text-success" style="font-weight: 700;">0.00 TON</span>
+          </div>
+        </div>
+        <p class="text-danger text-small" style="margin-bottom: 0;">
+          ⚠️ This action cannot be undone. Please verify all details are correct.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-success" onclick="processWithdrawal()">Confirm & Withdraw</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function setWithdrawAmount(amount) {
+      const maxBalance = 1250;
+      document.getElementById('withdrawAmount').value = Math.min(amount, maxBalance);
+      calculateFees();
+    }
+
+    function calculateFees() {
+      const amount = parseFloat(document.getElementById('withdrawAmount').value) || 0;
+      const networkFee = 0.50;
+      const processingFeePercent = 0.01;
+      const processingFee = amount * processingFeePercent;
+      const totalFees = networkFee + processingFee;
+      const youReceive = Math.max(0, amount - totalFees);
+
+      document.getElementById('feeAmount').textContent = amount.toFixed(2) + ' TON';
+      document.getElementById('feeNetwork').textContent = '-' + networkFee.toFixed(2) + ' TON';
+      document.getElementById('feeProcessing').textContent = '-' + processingFee.toFixed(2) + ' TON';
+      document.getElementById('feeTotal').textContent = youReceive.toFixed(2) + ' TON';
+    }
+
+    function confirmWithdrawal() {
+      const amount = parseFloat(document.getElementById('withdrawAmount').value) || 0;
+      const address = document.getElementById('destinationAddress').value.trim();
+
+      if (amount < 10) {
+        alert('⚠️ Minimum withdrawal amount is 10 TON');
+        return;
+      }
+
+      if (amount > 1250) {
+        alert('⚠️ Insufficient balance');
+        return;
+      }
+
+      if (!address) {
+        alert('⚠️ Please enter a destination address');
+        return;
+      }
+
+      // Calculate fees
+      const networkFee = 0.50;
+      const processingFee = amount * 0.01;
+      const totalFees = networkFee + processingFee;
+      const youReceive = amount - totalFees;
+
+      // Populate modal
+      document.getElementById('confirmAmount').textContent = amount.toFixed(2) + ' TON';
+      document.getElementById('confirmAddress').textContent = address.substring(0, 20) + '...';
+      document.getElementById('confirmFees').textContent = totalFees.toFixed(2) + ' TON';
+      document.getElementById('confirmTotal').textContent = youReceive.toFixed(2) + ' TON';
+
+      // Show modal
+      document.getElementById('confirmModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('confirmModal').style.display = 'none';
+    }
+
+    function processWithdrawal() {
+      // In a real app, this would process the withdrawal
+      alert('✅ Withdrawal request submitted! Processing time: 5-15 minutes');
+      window.location.href = 'wallet.html';
+    }
+  </script>
+</body>
+</html>

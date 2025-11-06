@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connection Error | Gift_x1000</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .error-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+      text-align: center;
+      padding: var(--spacing-xl);
+    }
+
+    .error-icon {
+      font-size: 6rem;
+      margin-bottom: var(--spacing-lg);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .status-indicator {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      animation: blink 1.5s ease-in-out infinite;
+    }
+
+    .status-indicator.checking {
+      background: var(--warning-orange);
+    }
+
+    .status-indicator.connected {
+      background: var(--success-green);
+      animation: none;
+    }
+
+    .status-indicator.disconnected {
+      background: var(--danger-red);
+    }
+
+    @keyframes blink {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.3;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="error-container">
+      <div class="error-icon">📡</div>
+      <h2 class="mb-2">Connection Error</h2>
+      <p class="text-secondary mb-4" style="max-width: 400px;">
+        We're having trouble connecting to the server. This could be due to your internet connection or our servers may be temporarily down.
+      </p>
+
+      <!-- Connection Status -->
+      <div class="glass-card mb-4" style="max-width: 400px; width: 100%;">
+        <h3 class="mb-3">Connection Status</h3>
+
+        <div style="background: rgba(30, 30, 46, 0.6); border-radius: var(--radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-md);">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-secondary">Internet</span>
+            <span class="flex items-center">
+              <span class="status-indicator checking" id="internetStatus"></span>
+              <span id="internetText">Checking...</span>
+            </span>
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-secondary">Server</span>
+            <span class="flex items-center">
+              <span class="status-indicator checking" id="serverStatus"></span>
+              <span id="serverText">Checking...</span>
+            </span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-secondary">TON Network</span>
+            <span class="flex items-center">
+              <span class="status-indicator checking" id="tonStatus"></span>
+              <span id="tonText">Checking...</span>
+            </span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-block" onclick="retryConnection()">
+          🔄 Retry Connection
+        </button>
+      </div>
+
+      <!-- Troubleshooting Tips -->
+      <div class="glass-card mb-4" style="max-width: 400px; width: 100%;">
+        <h3 class="mb-3">💡 Troubleshooting Tips</h3>
+        <ul style="color: var(--text-secondary); font-size: 0.875rem; text-align: left; margin-left: 1.5rem;">
+          <li style="margin-bottom: var(--spacing-md);">
+            Check your internet connection
+          </li>
+          <li style="margin-bottom: var(--spacing-md);">
+            Try refreshing the page
+          </li>
+          <li style="margin-bottom: var(--spacing-md);">
+            Clear your browser cache
+          </li>
+          <li style="margin-bottom: var(--spacing-md);">
+            Disable VPN or proxy if you're using one
+          </li>
+          <li>
+            Check our status page for known issues
+          </li>
+        </ul>
+      </div>
+
+      <!-- Quick Actions -->
+      <div style="max-width: 400px; width: 100%;">
+        <button class="btn btn-outline btn-block mb-2" onclick="window.location.reload()">
+          ↻ Refresh Page
+        </button>
+        <button class="btn btn-outline btn-block mb-2" onclick="window.location.href='index.html'">
+          🏠 Go to Home
+        </button>
+      </div>
+
+      <!-- Server Status -->
+      <div class="mt-4">
+        <p class="text-muted text-small mb-2">Check server status:</p>
+        <button class="btn btn-ghost btn-sm">
+          📊 Status Page
+        </button>
+      </div>
+
+      <!-- Support -->
+      <div class="mt-3">
+        <p class="text-muted text-small">Still having issues?</p>
+        <button class="btn btn-outline btn-sm">
+          💬 Contact Support
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simulate connection checking
+    function checkConnections() {
+      // Check internet (simulate)
+      setTimeout(() => {
+        const internetStatus = document.getElementById('internetStatus');
+        const internetText = document.getElementById('internetText');
+        if (navigator.onLine) {
+          internetStatus.className = 'status-indicator connected';
+          internetText.textContent = 'Connected';
+          internetText.style.color = 'var(--success-green)';
+        } else {
+          internetStatus.className = 'status-indicator disconnected';
+          internetText.textContent = 'Disconnected';
+          internetText.style.color = 'var(--danger-red)';
+        }
+      }, 1000);
+
+      // Check server (simulate)
+      setTimeout(() => {
+        const serverStatus = document.getElementById('serverStatus');
+        const serverText = document.getElementById('serverText');
+        serverStatus.className = 'status-indicator disconnected';
+        serverText.textContent = 'Unreachable';
+        serverText.style.color = 'var(--danger-red)';
+      }, 2000);
+
+      // Check TON network (simulate)
+      setTimeout(() => {
+        const tonStatus = document.getElementById('tonStatus');
+        const tonText = document.getElementById('tonText');
+        tonStatus.className = 'status-indicator connected';
+        tonText.textContent = 'Connected';
+        tonText.style.color = 'var(--success-green)';
+      }, 3000);
+    }
+
+    function retryConnection() {
+      // Reset all statuses
+      document.querySelectorAll('.status-indicator').forEach(el => {
+        el.className = 'status-indicator checking';
+      });
+      document.getElementById('internetText').textContent = 'Checking...';
+      document.getElementById('serverText').textContent = 'Checking...';
+      document.getElementById('tonText').textContent = 'Checking...';
+      document.getElementById('internetText').style.color = '';
+      document.getElementById('serverText').style.color = '';
+      document.getElementById('tonText').style.color = '';
+
+      // Check again
+      checkConnections();
+    }
+
+    // Initial check
+    checkConnections();
+
+    // Monitor online/offline status
+    window.addEventListener('online', () => {
+      console.log('Back online');
+      retryConnection();
+    });
+
+    window.addEventListener('offline', () => {
+      console.log('Connection lost');
+      const internetStatus = document.getElementById('internetStatus');
+      const internetText = document.getElementById('internetText');
+      internetStatus.className = 'status-indicator disconnected';
+      internetText.textContent = 'Disconnected';
+      internetText.style.color = 'var(--danger-red)';
+    });
+  </script>
+</body>
+</html>

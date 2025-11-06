@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Play - Gift_x1000</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .tutorial-step {
+      background: rgba(30, 30, 46, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-xl);
+      margin-bottom: var(--spacing-lg);
+      position: relative;
+    }
+
+    .step-number {
+      position: absolute;
+      top: -15px;
+      left: 20px;
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .step-icon {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .faq-item {
+      background: rgba(30, 30, 46, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .faq-item:hover {
+      background: rgba(30, 30, 46, 0.8);
+    }
+
+    .faq-question {
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-top: var(--spacing-md);
+      display: none;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .video-placeholder {
+      aspect-ratio: 16/9;
+      background: rgba(30, 30, 46, 0.8);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--spacing-lg);
+      border: 2px solid var(--border-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <button class="btn btn-ghost btn-sm" onclick="window.history.back()">← Back</button>
+      <h2 class="header-title mb-0">How to Play</h2>
+      <div style="width: 60px;"></div>
+    </div>
+
+    <!-- Welcome Card -->
+    <div class="glass-card mb-4 text-center">
+      <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">🎓</div>
+      <h2 class="mb-2">Welcome to Gift_x1000!</h2>
+      <p class="text-secondary mb-0">
+        Learn how to play PvP coin flip betting and start winning today!
+      </p>
+    </div>
+
+    <!-- Video Tutorial -->
+    <div class="glass-card mb-4">
+      <h3 class="mb-3">📹 Video Tutorial</h3>
+      <div class="video-placeholder">
+        <div style="text-align: center;">
+          <div style="font-size: 4rem; margin-bottom: 1rem;">▶️</div>
+          <div style="font-weight: 600; margin-bottom: 0.5rem;">Video Tutorial</div>
+          <div class="text-muted text-small">Watch how to play Gift_x1000</div>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-block">
+        ▶️ Watch Tutorial
+      </button>
+    </div>
+
+    <!-- Step-by-Step Guide -->
+    <h3 class="mb-3">📚 Step-by-Step Guide</h3>
+
+    <div class="tutorial-step">
+      <div class="step-number">1</div>
+      <div class="step-icon">💰</div>
+      <h4 class="mb-2">Deposit TON</h4>
+      <p class="text-secondary mb-0">
+        First, deposit TON cryptocurrency into your Gift_x1000 wallet. Minimum deposit is 1 TON. Your funds will be available after 3 network confirmations.
+      </p>
+      <button class="btn btn-outline btn-sm mt-3" onclick="window.location.href='deposit.html'">
+        Go to Deposit →
+      </button>
+    </div>
+
+    <div class="tutorial-step">
+      <div class="step-number">2</div>
+      <div class="step-icon">🎮</div>
+      <h4 class="mb-2">Create or Join a Game</h4>
+      <p class="text-secondary mb-3">
+        You can either create your own game room or join an existing one:
+      </p>
+      <ul style="color: var(--text-secondary); font-size: 0.875rem; margin-left: 1.5rem;">
+        <li style="margin-bottom: 0.5rem;"><strong>Create Game:</strong> Set your bet amount, choose Heads or Tails, and wait for an opponent</li>
+        <li><strong>Join Game:</strong> Browse active rooms on the home page and join any open game</li>
+      </ul>
+      <button class="btn btn-outline btn-sm mt-3" onclick="window.location.href='create-game.html'">
+        Create Game →
+      </button>
+    </div>
+
+    <div class="tutorial-step">
+      <div class="step-number">3</div>
+      <div class="step-icon">🪙</div>
+      <h4 class="mb-2">Choose Your Side</h4>
+      <p class="text-secondary mb-0">
+        Select either Heads or Tails. The game uses a provably fair system to determine the outcome, ensuring complete randomness and transparency.
+      </p>
+    </div>
+
+    <div class="tutorial-step">
+      <div class="step-number">4</div>
+      <div class="step-icon">⏱️</div>
+      <h4 class="mb-2">Wait for the Flip</h4>
+      <p class="text-secondary mb-0">
+        Once both players have joined and placed their bets, the coin will flip automatically. Watch the exciting animation as the result is determined!
+      </p>
+    </div>
+
+    <div class="tutorial-step">
+      <div class="step-number">5</div>
+      <div class="step-icon">🎉</div>
+      <h4 class="mb-2">Win or Learn</h4>
+      <p class="text-secondary mb-3">
+        If the coin lands on your chosen side, you win! The prize (minus a 2% platform fee) is instantly credited to your wallet. If you lose, don't worry - try again!
+      </p>
+      <div style="background: rgba(74, 222, 128, 0.1); border-left: 4px solid var(--success-green); border-radius: var(--radius-md); padding: var(--spacing-md);">
+        <div style="font-weight: 600; margin-bottom: 0.25rem;">Example Win:</div>
+        <div class="text-secondary text-small">
+          Bet 50 TON, Win 50 TON from opponent, minus 2 TON fee = <strong class="text-success">+48 TON profit!</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Rules -->
+    <div class="glass-card mb-4">
+      <h3 class="mb-3">📋 Game Rules</h3>
+      <ul style="color: var(--text-secondary); font-size: 0.875rem; margin-left: 1.5rem;">
+        <li style="margin-bottom: var(--spacing-md);">
+          <strong>Betting:</strong> Both players must bet the same amount. Minimum bet varies by room.
+        </li>
+        <li style="margin-bottom: var(--spacing-md);">
+          <strong>Fairness:</strong> Every game uses cryptographic proof to ensure fairness. You can verify any result.
+        </li>
+        <li style="margin-bottom: var(--spacing-md);">
+          <strong>Platform Fee:</strong> 2% fee on winnings. No fee if you lose.
+        </li>
+        <li style="margin-bottom: var(--spacing-md);">
+          <strong>Timeouts:</strong> If a player doesn't join within 5 minutes, the game is cancelled and bets are refunded.
+        </li>
+        <li>
+          <strong>Fair Play:</strong> Cheating, collusion, or any unfair practices will result in account suspension.
+        </li>
+      </ul>
+    </div>
+
+    <!-- FAQ Section -->
+    <h3 class="mb-3">❓ Frequently Asked Questions</h3>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <span>Is Gift_x1000 provably fair?</span>
+        <span style="font-size: 1.25rem;">+</span>
+      </div>
+      <div class="faq-answer">
+        Yes! Every game uses cryptographic hashing to ensure complete fairness. You can verify any game result using our fairness proof system. The outcome is determined by a combination of server seed, client seed, and nonce, making it impossible to manipulate.
+      </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <span>What are the fees?</span>
+        <span style="font-size: 1.25rem;">+</span>
+      </div>
+      <div class="faq-answer">
+        We charge a 2% platform fee on winnings only. If you lose, there's no fee. For deposits and withdrawals, network fees apply (typically 0.5-1 TON).
+      </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <span>How long do withdrawals take?</span>
+        <span style="font-size: 1.25rem;">+</span>
+      </div>
+      <div class="faq-answer">
+        Withdrawals are typically processed within 5-15 minutes. During high traffic, it may take up to 1 hour. You'll receive a notification when your withdrawal is complete.
+      </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <span>Can I cancel a game I created?</span>
+        <span style="font-size: 1.25rem;">+</span>
+      </div>
+      <div class="faq-answer">
+        Yes, you can cancel a game as long as no opponent has joined yet. Once an opponent joins, the game must be completed.
+      </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <span>What happens if there's a connection error?</span>
+        <span style="font-size: 1.25rem;">+</span>
+      </div>
+      <div class="faq-answer">
+        If you disconnect during a game, the game will continue automatically based on your chosen side. The result will be saved and you can view it in your game history. Your funds are always safe.
+      </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <span>Is there a maximum bet?</span>
+        <span style="font-size: 1.25rem;">+</span>
+      </div>
+      <div class="faq-answer">
+        There's no hard maximum, but individual rooms may have their own limits. You can also set personal betting limits in Settings under Responsible Gaming.
+      </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <span>How do I verify game fairness?</span>
+        <span style="font-size: 1.25rem;">+</span>
+      </div>
+      <div class="faq-answer">
+        Click the "View Fairness Proof" link on any completed game. You'll see the server seed, client seed, and nonce used to generate the result. You can independently verify this using any SHA-256 calculator.
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="glass-card mt-4">
+      <h3 class="mb-3">🔗 Quick Links</h3>
+      <button class="btn btn-outline btn-block mb-2" onclick="window.location.href='fairness-proof.html'">
+        🔒 Learn About Fairness
+      </button>
+      <button class="btn btn-outline btn-block mb-2" onclick="window.location.href='profile.html'">
+        👤 View Your Stats
+      </button>
+      <button class="btn btn-outline btn-block mb-2" onclick="window.location.href='leaderboard.html'">
+        🏆 Check Leaderboard
+      </button>
+      <button class="btn btn-outline btn-block" onclick="window.location.href='settings.html'">
+        ⚙️ Game Settings
+      </button>
+    </div>
+
+    <!-- Support -->
+    <div class="glass-card mt-4 text-center">
+      <h3 class="mb-2">Need More Help?</h3>
+      <p class="text-secondary mb-3">
+        Can't find what you're looking for? Our support team is here to help!
+      </p>
+      <button class="btn btn-primary">
+        💬 Contact Support
+      </button>
+    </div>
+
+    <!-- Ready to Play -->
+    <div class="text-center mt-4 mb-4">
+      <h3 class="mb-3">Ready to Play? 🚀</h3>
+      <button class="btn btn-primary btn-lg" onclick="window.location.href='index.html'">
+        Start Playing Now!
+      </button>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <div class="nav-icon">🏠</div>
+      <div class="nav-label">Home</div>
+    </a>
+    <a href="wallet.html" class="nav-item">
+      <div class="nav-icon">💰</div>
+      <div class="nav-label">Wallet</div>
+    </a>
+    <a href="game-history.html" class="nav-item">
+      <div class="nav-icon">📊</div>
+      <div class="nav-label">History</div>
+    </a>
+    <a href="leaderboard.html" class="nav-item">
+      <div class="nav-icon">🏆</div>
+      <div class="nav-label">Leaderboard</div>
+    </a>
+    <a href="profile.html" class="nav-item">
+      <div class="nav-icon">👤</div>
+      <div class="nav-label">Profile</div>
+    </a>
+  </nav>
+
+  <script>
+    function toggleFaq(element) {
+      const isActive = element.classList.contains('active');
+
+      // Close all FAQs
+      document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('active');
+        item.querySelector('.faq-question span:last-child').textContent = '+';
+      });
+
+      // Open clicked FAQ if it wasn't active
+      if (!isActive) {
+        element.classList.add('active');
+        element.querySelector('.faq-question span:last-child').textContent = '−';
+      }
+    }
+  </script>
+</body>
+</html>
