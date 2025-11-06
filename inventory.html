@@ -88,13 +88,7 @@
     .inventory-name {
       font-weight: 600;
       font-size: 0.75rem;
-      margin-bottom: 0.25rem;
       color: var(--text-primary);
-    }
-
-    .inventory-quantity {
-      font-size: 0.625rem;
-      color: var(--text-muted);
     }
 
     .gift-detail-container {
@@ -182,15 +176,15 @@
     <!-- Inventory Stats -->
     <div class="inventory-stats">
       <div class="inventory-stat">
-        <div class="inventory-stat-value">12</div>
+        <div class="inventory-stat-value">20</div>
         <div class="inventory-stat-label">Total Gifts</div>
       </div>
       <div class="inventory-stat">
-        <div class="inventory-stat-value" style="color: var(--warning-orange);">3</div>
+        <div class="inventory-stat-value" style="color: var(--warning-orange);">6</div>
         <div class="inventory-stat-label">Locked</div>
       </div>
       <div class="inventory-stat">
-        <div class="inventory-stat-value" style="color: var(--success-green);">9</div>
+        <div class="inventory-stat-value" style="color: var(--success-green);">14</div>
         <div class="inventory-stat-label">Unlocked</div>
       </div>
     </div>
@@ -204,57 +198,145 @@
 
     <!-- Inventory Grid -->
     <div class="inventory-grid">
-      <!-- Locked Item 1 -->
-      <div class="inventory-item locked" onclick="showGiftDetails('Delicious Cake', '🎂', 500, 25, true, 18, 3)">
+      <!-- Locked Gifts -->
+      <div class="inventory-item locked" onclick="showGiftDetails('Delicious Cake', '🎂', 500, 25, true, 18)">
         <div class="inventory-image">🎂</div>
         <div class="inventory-info">
           <div class="inventory-name">Delicious Cake</div>
-          <div class="inventory-quantity">×3</div>
         </div>
       </div>
 
-      <!-- Unlocked Item 1 -->
-      <div class="inventory-item" onclick="showGiftDetails('Red Rose', '🌹', 300, 15, false, 0, 5)">
-        <div class="inventory-image">🌹</div>
+      <div class="inventory-item locked" onclick="showGiftDetails('Delicious Cake', '🎂', 500, 25, true, 20)">
+        <div class="inventory-image">🎂</div>
         <div class="inventory-info">
-          <div class="inventory-name">Red Rose</div>
-          <div class="inventory-quantity">×5</div>
+          <div class="inventory-name">Delicious Cake</div>
         </div>
       </div>
 
-      <!-- Locked Item 2 -->
-      <div class="inventory-item locked" onclick="showGiftDetails('Golden Trophy', '🏆', 1000, 50, true, 5, 1)">
+      <div class="inventory-item locked" onclick="showGiftDetails('Golden Trophy', '🏆', 1000, 50, true, 5)">
         <div class="inventory-image">🏆</div>
         <div class="inventory-info">
           <div class="inventory-name">Golden Trophy</div>
-          <div class="inventory-quantity">×1</div>
         </div>
       </div>
 
-      <!-- Unlocked Item 2 -->
-      <div class="inventory-item" onclick="showGiftDetails('Party Popper', '🎉', 200, 10, false, 0, 8)">
-        <div class="inventory-image">🎉</div>
-        <div class="inventory-info">
-          <div class="inventory-name">Party Popper</div>
-          <div class="inventory-quantity">×8</div>
-        </div>
-      </div>
-
-      <!-- Unlocked Item 3 -->
-      <div class="inventory-item" onclick="showGiftDetails('Hot Coffee', '☕', 150, 8, false, 0, 4)">
-        <div class="inventory-image">☕</div>
-        <div class="inventory-info">
-          <div class="inventory-name">Hot Coffee</div>
-          <div class="inventory-quantity">×4</div>
-        </div>
-      </div>
-
-      <!-- Locked Item 3 -->
-      <div class="inventory-item locked" onclick="showGiftDetails('Fire Emoji', '🔥', 800, 40, true, 23, 2)">
+      <div class="inventory-item locked" onclick="showGiftDetails('Fire Emoji', '🔥', 800, 40, true, 23)">
         <div class="inventory-image">🔥</div>
         <div class="inventory-info">
           <div class="inventory-name">Fire Emoji</div>
-          <div class="inventory-quantity">×2</div>
+        </div>
+      </div>
+
+      <div class="inventory-item locked" onclick="showGiftDetails('Fire Emoji', '🔥', 800, 40, true, 15)">
+        <div class="inventory-image">🔥</div>
+        <div class="inventory-info">
+          <div class="inventory-name">Fire Emoji</div>
+        </div>
+      </div>
+
+      <div class="inventory-item locked" onclick="showGiftDetails('Delicious Cake', '🎂', 500, 25, true, 12)">
+        <div class="inventory-image">🎂</div>
+        <div class="inventory-info">
+          <div class="inventory-name">Delicious Cake</div>
+        </div>
+      </div>
+
+      <!-- Unlocked Gifts -->
+      <div class="inventory-item" onclick="showGiftDetails('Red Rose', '🌹', 300, 15, false, 0)">
+        <div class="inventory-image">🌹</div>
+        <div class="inventory-info">
+          <div class="inventory-name">Red Rose</div>
+        </div>
+      </div>
+
+      <div class="inventory-item" onclick="showGiftDetails('Red Rose', '🌹', 300, 15, false, 0)">
+        <div class="inventory-image">🌹</div>
+        <div class="inventory-info">
+          <div class="inventory-name">Red Rose</div>
+        </div>
+      </div>
+
+      <div class="inventory-item" onclick="showGiftDetails('Party Popper', '🎉', 200, 10, false, 0)">
+        <div class="inventory-image">🎉</div>
+        <div class="inventory-info">
+          <div class="inventory-name">Party Popper</div>
+        </div>
+      </div>
+
+      <div class="inventory-item" onclick="showGiftDetails('Hot Coffee', '☕', 150, 8, false, 0)">
+        <div class="inventory-image">☕</div>
+        <div class="inventory-info">
+          <div class="inventory-name">Hot Coffee</div>
+        </div>
+      </div>
+
+      <div class="inventory-item" onclick="showGiftDetails('Red Rose', '🌹', 300, 15, false, 0)">
+        <div class="inventory-image">🌹</div>
+        <div class="inventory-info">
+          <div class="inventory-name">Red Rose</div>
+        </div>
+      </div>
+
+      <div class="inventory-item" onclick="showGiftDetails('Hot Coffee', '☕', 150, 8, false, 0)">
+        <div class="inventory-image">☕</div>
+        <div class="inventory-info">
+          <div class="inventory-name">Hot Coffee</div>
+        </div>
+      </div>
+
+      <div class="inventory-item" onclick="showGiftDetails('Party Popper', '🎉', 200, 10, false, 0)">
+        <div class="inventory-image">🎉</div>
+        <div class="inventory-info">
+          <div class="inventory-name">Party Popper</div>
+        </div>
+      </div>
+
+      <div class="inventory-item" onclick="showGiftDetails('Red Rose', '🌹', 300, 15, false, 0)">
+        <div class="inventory-image">🌹</div>
+        <div class="inventory-info">
+          <div class="inventory-name">Red Rose</div>
+        </div>
+      </div>
+
+      <div class="inventory-item" onclick="showGiftDetails('Party Popper', '🎉', 200, 10, false, 0)">
+        <div class="inventory-image">🎉</div>
+        <div class="inventory-info">
+          <div class="inventory-name">Party Popper</div>
+        </div>
+      </div>
+
+      <div class="inventory-item" onclick="showGiftDetails('Hot Coffee', '☕', 150, 8, false, 0)">
+        <div class="inventory-image">☕</div>
+        <div class="inventory-info">
+          <div class="inventory-name">Hot Coffee</div>
+        </div>
+      </div>
+
+      <div class="inventory-item" onclick="showGiftDetails('Party Popper', '🎉', 200, 10, false, 0)">
+        <div class="inventory-image">🎉</div>
+        <div class="inventory-info">
+          <div class="inventory-name">Party Popper</div>
+        </div>
+      </div>
+
+      <div class="inventory-item" onclick="showGiftDetails('Red Rose', '🌹', 300, 15, false, 0)">
+        <div class="inventory-image">🌹</div>
+        <div class="inventory-info">
+          <div class="inventory-name">Red Rose</div>
+        </div>
+      </div>
+
+      <div class="inventory-item" onclick="showGiftDetails('Party Popper', '🎉', 200, 10, false, 0)">
+        <div class="inventory-image">🎉</div>
+        <div class="inventory-info">
+          <div class="inventory-name">Party Popper</div>
+        </div>
+      </div>
+
+      <div class="inventory-item" onclick="showGiftDetails('Hot Coffee', '☕', 150, 8, false, 0)">
+        <div class="inventory-image">☕</div>
+        <div class="inventory-info">
+          <div class="inventory-name">Hot Coffee</div>
         </div>
       </div>
     </div>
@@ -307,7 +389,7 @@
           <h3 class="gift-detail-name" id="detailName">Gift Name</h3>
 
           <!-- Stats -->
-          <div class="gift-detail-stats">
+          <div class="gift-detail-stats" style="grid-template-columns: 1fr 1fr 1fr;">
             <div class="gift-detail-stat">
               <div class="gift-detail-stat-label">Floor Price (Stars)</div>
               <div class="gift-detail-stat-value">
@@ -319,10 +401,6 @@
               <div class="gift-detail-stat-value">
                 <span>💎</span> <span id="detailTONPrice">25</span>
               </div>
-            </div>
-            <div class="gift-detail-stat">
-              <div class="gift-detail-stat-label">Quantity</div>
-              <div class="gift-detail-stat-value" id="detailQuantity">1</div>
             </div>
             <div class="gift-detail-stat">
               <div class="gift-detail-stat-label">Status</div>
@@ -440,8 +518,7 @@
       starsPrice: 0,
       tonPrice: 0,
       isLocked: false,
-      hoursRemaining: 0,
-      quantity: 1
+      hoursRemaining: 0
     };
 
     function filterInventory(filter) {
@@ -453,15 +530,14 @@
       console.log('Filtering inventory:', filter);
     }
 
-    function showGiftDetails(name, icon, starsPrice, tonPrice, isLocked, hoursRemaining, quantity) {
-      currentGiftDetail = { name, icon, starsPrice, tonPrice, isLocked, hoursRemaining, quantity };
+    function showGiftDetails(name, icon, starsPrice, tonPrice, isLocked, hoursRemaining) {
+      currentGiftDetail = { name, icon, starsPrice, tonPrice, isLocked, hoursRemaining };
 
       // Update modal content
       document.getElementById('detailName').textContent = name;
       document.getElementById('detailIcon').textContent = icon;
       document.getElementById('detailStarsPrice').textContent = starsPrice;
       document.getElementById('detailTONPrice').textContent = tonPrice;
-      document.getElementById('detailQuantity').textContent = `×${quantity}`;
       document.getElementById('detailStatus').textContent = isLocked ? 'Locked 🔒' : 'Unlocked ✅';
       document.getElementById('detailStatus').style.color = isLocked ? 'var(--warning-orange)' : 'var(--success-green)';
 
