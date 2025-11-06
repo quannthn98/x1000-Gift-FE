@@ -149,9 +149,21 @@
   <div class="container">
     <!-- Header -->
     <div class="header">
-      <h1 class="header-title">Gift_x1000</h1>
-      <div class="header-actions">
-        <button class="btn btn-ghost btn-sm">🔔</button>
+      <div class="header-left">
+        <h1 class="header-title">Home</h1>
+      </div>
+      <div class="header-right" id="headerRight">
+        <!-- Wallet Connected State -->
+        <div class="balance-pill stars" onclick="window.location.href='wallet.html'" style="cursor: pointer;">
+          <span class="balance-pill-icon">⭐</span>
+          <span class="balance-pill-amount">2,450</span>
+        </div>
+        <div class="balance-pill ton" onclick="window.location.href='wallet.html'" style="cursor: pointer;">
+          <span class="balance-pill-icon">💎</span>
+          <span class="balance-pill-amount">1,250</span>
+        </div>
+        <!-- Uncomment below and comment above to show "Not Connected" state -->
+        <!-- <button class="connect-wallet-btn" onclick="connectWallet()">Connect Wallet</button> -->
       </div>
     </div>
 

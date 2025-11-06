@@ -37,9 +37,20 @@
   <div class="container">
     <!-- Header -->
     <div class="header">
-      <button class="btn btn-ghost btn-sm" onclick="window.history.back()">← Back</button>
-      <h2 class="header-title mb-0">Settings</h2>
-      <div style="width: 60px;"></div>
+      <div class="header-left">
+        <button class="btn btn-ghost btn-sm" onclick="window.history.back()" style="padding: 0.5rem;">← Back</button>
+        <h2 class="header-title">Settings</h2>
+      </div>
+      <div class="header-right">
+        <div class="balance-pill stars" onclick="window.location.href='wallet.html'" style="cursor: pointer;">
+          <span class="balance-pill-icon">⭐</span>
+          <span class="balance-pill-amount">2,450</span>
+        </div>
+        <div class="balance-pill ton" onclick="window.location.href='wallet.html'" style="cursor: pointer;">
+          <span class="balance-pill-icon">💎</span>
+          <span class="balance-pill-amount">1,250</span>
+        </div>
+      </div>
     </div>
 
     <!-- Account Section -->

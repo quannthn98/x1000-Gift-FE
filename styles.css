@@ -320,19 +320,102 @@ p {
   justify-content: space-between;
   margin-bottom: var(--spacing-xl);
   padding-bottom: var(--spacing-md);
+  gap: var(--spacing-md);
 }
 
 .header-title {
   margin: 0;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
 }
 
 .header-actions {
   display: flex;
   gap: var(--spacing-sm);
+}
+
+/* Balance Pills */
+.balance-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.875rem;
+  background: rgba(30, 30, 46, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+.balance-pill:hover {
+  background: rgba(30, 30, 46, 1);
+  border-color: var(--primary-blue);
+  transform: translateY(-1px);
+}
+
+.balance-pill-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.balance-pill-amount {
+  color: var(--text-primary);
+}
+
+.balance-pill.stars {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 146, 60, 0.15) 100%);
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+.balance-pill.stars:hover {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.25) 0%, rgba(251, 146, 60, 0.25) 100%);
+  border-color: var(--warning-orange);
+}
+
+.balance-pill.ton {
+  background: linear-gradient(135deg, rgba(36, 129, 204, 0.15) 0%, rgba(156, 106, 222, 0.15) 100%);
+  border-color: rgba(36, 129, 204, 0.3);
+}
+
+.balance-pill.ton:hover {
+  background: linear-gradient(135deg, rgba(36, 129, 204, 0.25) 0%, rgba(156, 106, 222, 0.25) 100%);
+  border-color: var(--primary-blue);
+}
+
+.connect-wallet-btn {
+  padding: 0.5rem 1rem;
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: 0 0 15px rgba(36, 129, 204, 0.3);
+  white-space: nowrap;
+}
+
+.connect-wallet-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(36, 129, 204, 0.5);
 }
 
 /* Badge */

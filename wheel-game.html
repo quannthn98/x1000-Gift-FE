@@ -249,11 +249,20 @@
   <div class="container">
     <!-- Header -->
     <div class="header">
-      <button class="btn btn-ghost btn-sm" onclick="window.location.href='index.html'">← Exit</button>
-      <div>
-        <span class="badge badge-primary">System Game</span>
+      <div class="header-left">
+        <button class="btn btn-ghost btn-sm" onclick="window.location.href='index.html'" style="padding: 0.5rem;">← Back</button>
+        <h2 class="header-title">Wheel Game</h2>
       </div>
-      <button class="btn btn-ghost btn-sm">⋮</button>
+      <div class="header-right">
+        <div class="balance-pill stars" onclick="window.location.href='wallet.html'" style="cursor: pointer;">
+          <span class="balance-pill-icon">⭐</span>
+          <span class="balance-pill-amount">2,450</span>
+        </div>
+        <div class="balance-pill ton" onclick="window.location.href='wallet.html'" style="cursor: pointer;">
+          <span class="balance-pill-icon">💎</span>
+          <span class="balance-pill-amount">1,250</span>
+        </div>
+      </div>
     </div>
 
     <!-- Game Info -->
