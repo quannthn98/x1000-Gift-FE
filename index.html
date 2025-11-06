@@ -3,8 +3,204 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gift_x1000 - PvP Coin Flip</title>
+  <title>Gift_x1000 - PvP Gaming Platform</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .game-type-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .game-type-tab {
+      background: rgba(30, 30, 46, 0.6);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      text-align: center;
+    }
+
+    .game-type-tab:hover {
+      background: rgba(30, 30, 46, 0.8);
+      transform: translateY(-2px);
+    }
+
+    .game-type-tab.active {
+      border-color: var(--primary-blue);
+      background: rgba(36, 129, 204, 0.15);
+      box-shadow: 0 0 20px rgba(36, 129, 204, 0.2);
+    }
+
+    .game-type-icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .game-type-name {
+      font-weight: 600;
+      font-size: 1.125rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .game-type-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .game-section {
+      display: none;
+    }
+
+    .game-section.active {
+      display: block;
+    }
+
+    .wheel-game-card {
+      background: rgba(30, 30, 46, 0.6);
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--warning-orange);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+      transition: all var(--transition-base);
+      cursor: pointer;
+    }
+
+    .wheel-game-card:hover {
+      background: rgba(30, 30, 46, 0.8);
+      transform: translateX(4px);
+    }
+
+    .wheel-game-card.spinning {
+      border-left-color: var(--primary-blue);
+      opacity: 0.7;
+    }
+
+    .wheel-players {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      margin: var(--spacing-md) 0;
+      flex-wrap: wrap;
+    }
+
+    .wheel-player-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .wheel-player-bet {
+      position: absolute;
+      bottom: -8px;
+      right: -8px;
+      background: var(--bg-card);
+      border: 1px solid var(--success-green);
+      border-radius: var(--radius-full);
+      padding: 2px 6px;
+      font-size: 0.625rem;
+      white-space: nowrap;
+    }
+
+    .countdown-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .countdown-badge.warning {
+      background: rgba(251, 146, 60, 0.2);
+      color: var(--warning-orange);
+      animation: pulse-countdown 1s ease-in-out infinite;
+    }
+
+    .countdown-badge.danger {
+      background: rgba(239, 68, 68, 0.2);
+      color: var(--danger-red);
+      animation: pulse-countdown 0.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse-countdown {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .fab-menu {
+      position: fixed;
+      bottom: 160px;
+      right: 20px;
+      display: none;
+      flex-direction: column;
+      gap: var(--spacing-md);
+      z-index: 998;
+    }
+
+    .fab-menu.active {
+      display: flex;
+      animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fab-menu-item {
+      background: rgba(30, 30, 46, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-md);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .fab-menu-item:hover {
+      background: rgba(30, 30, 46, 1);
+      transform: translateX(-5px);
+    }
+
+    .fab-menu-icon {
+      font-size: 1.5rem;
+    }
+
+    .fab-menu-text {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .fab.active {
+      transform: rotate(45deg);
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -19,7 +215,7 @@
     <!-- Welcome Banner -->
     <div class="glass-card mb-4">
       <h2 class="mb-2">Welcome to Gift_x1000! 🎉</h2>
-      <p class="mb-0">The most exciting PvP coin flip betting platform on Telegram. Choose your side, place your bet, and win big!</p>
+      <p class="mb-0">Experience thrilling PvP games on Telegram! Choose between classic Coin Flip duels or join the exciting Wheel of Fortune with multiple players!</p>
     </div>
 
     <!-- Platform Stats -->
@@ -38,140 +234,336 @@
       </div>
     </div>
 
-    <!-- Active Rooms Section -->
-    <div class="flex justify-between items-center mb-3">
-      <h3 class="mb-0">Active Rooms</h3>
-      <span class="badge badge-primary">12 Live</span>
+    <!-- Game Type Selection Tabs -->
+    <div class="game-type-tabs">
+      <div class="game-type-tab active" id="coinFlipTab" onclick="switchGameType('coinFlip')">
+        <div class="game-type-icon">🪙</div>
+        <div class="game-type-name">Coin Flip</div>
+        <div class="game-type-desc">1v1 PvP Duel</div>
+      </div>
+      <div class="game-type-tab" id="wheelTab" onclick="switchGameType('wheel')">
+        <div class="game-type-icon">🎡</div>
+        <div class="game-type-name">Wheel of Fortune</div>
+        <div class="game-type-desc">Multi-Player Game</div>
+      </div>
     </div>
 
-    <!-- Game Rooms List -->
-    <ul class="list">
-      <li class="list-item interactive" onclick="window.location.href='game-room.html'">
-        <div class="list-item-header">
-          <div class="flex items-center gap-2">
-            <div class="avatar avatar-sm">JD</div>
-            <div>
-              <div class="list-item-title">JohnDoe's Game</div>
-              <div class="text-muted text-tiny">Waiting for opponent...</div>
-            </div>
-          </div>
-          <span class="badge badge-success">Open</span>
-        </div>
-        <div class="divider" style="margin: 0.75rem 0;"></div>
-        <div class="list-item-meta">
-          <span>💰 <strong>50 TON</strong></span>
-          <span>🪙 Heads</span>
-          <span>⏱️ 2m ago</span>
-        </div>
-      </li>
+    <!-- Coin Flip Section -->
+    <div class="game-section active" id="coinFlipSection">
+      <div class="flex justify-between items-center mb-3">
+        <h3 class="mb-0">Coin Flip Rooms</h3>
+        <span class="badge badge-primary">12 Live</span>
+      </div>
 
-      <li class="list-item interactive" onclick="window.location.href='game-room.html'">
-        <div class="list-item-header">
-          <div class="flex items-center gap-2">
-            <div class="avatar avatar-sm" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">CR</div>
-            <div>
-              <div class="list-item-title">CryptoRich</div>
-              <div class="text-muted text-tiny">Waiting for opponent...</div>
+      <!-- Coin Flip Game Rooms List -->
+      <ul class="list">
+        <li class="list-item interactive" onclick="window.location.href='game-room.html'">
+          <div class="list-item-header">
+            <div class="flex items-center gap-2">
+              <div class="avatar avatar-sm">JD</div>
+              <div>
+                <div class="list-item-title">JohnDoe's Game</div>
+                <div class="text-muted text-tiny">Waiting for opponent...</div>
+              </div>
             </div>
+            <span class="badge badge-success">Open</span>
           </div>
-          <span class="badge badge-success">Open</span>
-        </div>
-        <div class="divider" style="margin: 0.75rem 0;"></div>
-        <div class="list-item-meta">
-          <span>💰 <strong>100 TON</strong></span>
-          <span>🪙 Tails</span>
-          <span>⏱️ 5m ago</span>
-        </div>
-      </li>
+          <div class="divider" style="margin: 0.75rem 0;"></div>
+          <div class="list-item-meta">
+            <span>💰 <strong>50 TON</strong></span>
+            <span>🪙 Heads</span>
+            <span>⏱️ 2m ago</span>
+          </div>
+        </li>
 
-      <li class="list-item interactive" onclick="window.location.href='game-room.html'">
-        <div class="list-item-header">
-          <div class="flex items-center gap-2">
-            <div class="avatar avatar-sm" style="background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);">LK</div>
-            <div>
-              <div class="list-item-title">LuckyKing</div>
-              <div class="text-muted text-tiny">Waiting for opponent...</div>
+        <li class="list-item interactive" onclick="window.location.href='game-room.html'">
+          <div class="list-item-header">
+            <div class="flex items-center gap-2">
+              <div class="avatar avatar-sm" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">CR</div>
+              <div>
+                <div class="list-item-title">CryptoRich</div>
+                <div class="text-muted text-tiny">Waiting for opponent...</div>
+              </div>
             </div>
+            <span class="badge badge-success">Open</span>
           </div>
-          <span class="badge badge-success">Open</span>
-        </div>
-        <div class="divider" style="margin: 0.75rem 0;"></div>
-        <div class="list-item-meta">
-          <span>💰 <strong>25 TON</strong></span>
-          <span>🪙 Heads</span>
-          <span>⏱️ 8m ago</span>
-        </div>
-      </li>
+          <div class="divider" style="margin: 0.75rem 0;"></div>
+          <div class="list-item-meta">
+            <span>💰 <strong>100 TON</strong></span>
+            <span>🪙 Tails</span>
+            <span>⏱️ 5m ago</span>
+          </div>
+        </li>
 
-      <li class="list-item" style="opacity: 0.6;">
-        <div class="list-item-header">
-          <div class="flex items-center gap-2">
-            <div class="avatar avatar-sm" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">BW</div>
-            <div>
-              <div class="list-item-title">BigWhale</div>
-              <div class="text-muted text-tiny">Game in progress...</div>
+        <li class="list-item interactive" onclick="window.location.href='game-room.html'">
+          <div class="list-item-header">
+            <div class="flex items-center gap-2">
+              <div class="avatar avatar-sm" style="background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);">LK</div>
+              <div>
+                <div class="list-item-title">LuckyKing</div>
+                <div class="text-muted text-tiny">Waiting for opponent...</div>
+              </div>
             </div>
+            <span class="badge badge-success">Open</span>
           </div>
-          <span class="badge badge-warning">Playing</span>
-        </div>
-        <div class="divider" style="margin: 0.75rem 0;"></div>
-        <div class="list-item-meta">
-          <span>💰 <strong>500 TON</strong></span>
-          <span>🪙 Tails</span>
-          <span>⏱️ 12m ago</span>
-        </div>
-      </li>
+          <div class="divider" style="margin: 0.75rem 0;"></div>
+          <div class="list-item-meta">
+            <span>💰 <strong>25 TON</strong></span>
+            <span>🪙 Heads</span>
+            <span>⏱️ 8m ago</span>
+          </div>
+        </li>
 
-      <li class="list-item interactive" onclick="window.location.href='game-room.html'">
-        <div class="list-item-header">
-          <div class="flex items-center gap-2">
-            <div class="avatar avatar-sm">MP</div>
-            <div>
-              <div class="list-item-title">MoonPlayer</div>
-              <div class="text-muted text-tiny">Waiting for opponent...</div>
+        <li class="list-item" style="opacity: 0.6;">
+          <div class="list-item-header">
+            <div class="flex items-center gap-2">
+              <div class="avatar avatar-sm" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">BW</div>
+              <div>
+                <div class="list-item-title">BigWhale</div>
+                <div class="text-muted text-tiny">Game in progress...</div>
+              </div>
             </div>
+            <span class="badge badge-warning">Playing</span>
           </div>
-          <span class="badge badge-success">Open</span>
-        </div>
-        <div class="divider" style="margin: 0.75rem 0;"></div>
-        <div class="list-item-meta">
-          <span>💰 <strong>75 TON</strong></span>
-          <span>🪙 Heads</span>
-          <span>⏱️ 15m ago</span>
-        </div>
-      </li>
+          <div class="divider" style="margin: 0.75rem 0;"></div>
+          <div class="list-item-meta">
+            <span>💰 <strong>500 TON</strong></span>
+            <span>🪙 Tails</span>
+            <span>⏱️ 12m ago</span>
+          </div>
+        </li>
 
-      <li class="list-item interactive" onclick="window.location.href='game-room.html'">
-        <div class="list-item-header">
-          <div class="flex items-center gap-2">
-            <div class="avatar avatar-sm" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">GM</div>
-            <div>
-              <div class="list-item-title">GamerPro</div>
-              <div class="text-muted text-tiny">Waiting for opponent...</div>
+        <li class="list-item interactive" onclick="window.location.href='game-room.html'">
+          <div class="list-item-header">
+            <div class="flex items-center gap-2">
+              <div class="avatar avatar-sm">MP</div>
+              <div>
+                <div class="list-item-title">MoonPlayer</div>
+                <div class="text-muted text-tiny">Waiting for opponent...</div>
+              </div>
             </div>
+            <span class="badge badge-success">Open</span>
           </div>
-          <span class="badge badge-success">Open</span>
-        </div>
-        <div class="divider" style="margin: 0.75rem 0;"></div>
-        <div class="list-item-meta">
-          <span>💰 <strong>150 TON</strong></span>
-          <span>🪙 Tails</span>
-          <span>⏱️ 18m ago</span>
-        </div>
-      </li>
-    </ul>
+          <div class="divider" style="margin: 0.75rem 0;"></div>
+          <div class="list-item-meta">
+            <span>💰 <strong>75 TON</strong></span>
+            <span>🪙 Heads</span>
+            <span>⏱️ 15m ago</span>
+          </div>
+        </li>
 
-    <!-- Empty State (hidden by default, shown when no rooms) -->
-    <!-- <div class="empty-state" style="display: none;">
-      <div class="empty-state-icon">🎲</div>
-      <h3 class="empty-state-title">No Active Rooms</h3>
-      <p class="empty-state-message">Be the first to create a game room and start playing!</p>
-      <button class="btn btn-primary" onclick="window.location.href='create-game.html'">Create Game</button>
-    </div> -->
+        <li class="list-item interactive" onclick="window.location.href='game-room.html'">
+          <div class="list-item-header">
+            <div class="flex items-center gap-2">
+              <div class="avatar avatar-sm" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">GM</div>
+              <div>
+                <div class="list-item-title">GamerPro</div>
+                <div class="text-muted text-tiny">Waiting for opponent...</div>
+              </div>
+            </div>
+            <span class="badge badge-success">Open</span>
+          </div>
+          <div class="divider" style="margin: 0.75rem 0;"></div>
+          <div class="list-item-meta">
+            <span>💰 <strong>150 TON</strong></span>
+            <span>🪙 Tails</span>
+            <span>⏱️ 18m ago</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Wheel of Fortune Section -->
+    <div class="game-section" id="wheelSection">
+      <div class="flex justify-between items-center mb-3">
+        <h3 class="mb-0">Wheel of Fortune</h3>
+        <span class="badge badge-warning">8 Active</span>
+      </div>
+
+      <!-- Wheel Game Rooms List -->
+      <div class="wheel-game-card" onclick="window.location.href='wheel-game.html'">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <div style="font-weight: 600; font-size: 1.125rem;">Fortune Wheel #2847</div>
+            <div class="text-muted text-small">Created by WheelMaster</div>
+          </div>
+          <span class="countdown-badge warning">⏱️ 42s</span>
+        </div>
+
+        <div class="divider" style="margin: 0.75rem 0;"></div>
+
+        <!-- Total Pot and Players -->
+        <div class="flex justify-between items-center mb-3">
+          <div>
+            <div class="text-muted text-small">Total Pot</div>
+            <div style="font-size: 1.5rem; font-weight: 700; color: var(--success-green);">285 TON</div>
+          </div>
+          <div class="text-right">
+            <div class="text-muted text-small">Players</div>
+            <div style="font-size: 1.5rem; font-weight: 700;">5/10</div>
+          </div>
+        </div>
+
+        <!-- Players -->
+        <div class="wheel-players">
+          <div class="wheel-player-avatar">JD
+            <div class="wheel-player-bet">50</div>
+          </div>
+          <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">CR
+            <div class="wheel-player-bet">100</div>
+          </div>
+          <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);">LK
+            <div class="wheel-player-bet">75</div>
+          </div>
+          <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">BW
+            <div class="wheel-player-bet">50</div>
+          </div>
+          <div class="wheel-player-avatar">MP
+            <div class="wheel-player-bet">10</div>
+          </div>
+        </div>
+
+        <div class="text-muted text-tiny mt-2">
+          💡 Your winning chance is proportional to your bet
+        </div>
+      </div>
+
+      <div class="wheel-game-card" onclick="window.location.href='wheel-game.html'">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <div style="font-weight: 600; font-size: 1.125rem;">Lucky Spin #2846</div>
+            <div class="text-muted text-small">Created by SpinKing</div>
+          </div>
+          <span class="countdown-badge danger">⏱️ 3s</span>
+        </div>
+
+        <div class="divider" style="margin: 0.75rem 0;"></div>
+
+        <div class="flex justify-between items-center mb-3">
+          <div>
+            <div class="text-muted text-small">Total Pot</div>
+            <div style="font-size: 1.5rem; font-weight: 700; color: var(--success-green);">520 TON</div>
+          </div>
+          <div class="text-right">
+            <div class="text-muted text-small">Players</div>
+            <div style="font-size: 1.5rem; font-weight: 700;">8/10</div>
+          </div>
+        </div>
+
+        <div class="wheel-players">
+          <div class="wheel-player-avatar">A1
+            <div class="wheel-player-bet">100</div>
+          </div>
+          <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">B2
+            <div class="wheel-player-bet">50</div>
+          </div>
+          <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);">C3
+            <div class="wheel-player-bet">150</div>
+          </div>
+          <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">D4
+            <div class="wheel-player-bet">80</div>
+          </div>
+          <div class="wheel-player-avatar">E5
+            <div class="wheel-player-bet">40</div>
+          </div>
+          <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">F6
+            <div class="wheel-player-bet">50</div>
+          </div>
+          <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);">G7
+            <div class="wheel-player-bet">30</div>
+          </div>
+          <div class="wheel-player-avatar">H8
+            <div class="wheel-player-bet">20</div>
+          </div>
+        </div>
+
+        <div class="text-muted text-tiny mt-2">
+          ⚠️ Deposits blocked - Spinning soon!
+        </div>
+      </div>
+
+      <div class="wheel-game-card spinning">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <div style="font-weight: 600; font-size: 1.125rem;">Big Wheel #2845</div>
+            <div class="text-muted text-small">Created by MegaPlayer</div>
+          </div>
+          <span class="badge badge-primary">🎡 Spinning</span>
+        </div>
+
+        <div class="divider" style="margin: 0.75rem 0;"></div>
+
+        <div class="flex justify-between items-center mb-3">
+          <div>
+            <div class="text-muted text-small">Total Pot</div>
+            <div style="font-size: 1.5rem; font-weight: 700; color: var(--success-green);">1,250 TON</div>
+          </div>
+          <div class="text-right">
+            <div class="text-muted text-small">Players</div>
+            <div style="font-size: 1.5rem; font-weight: 700;">10/10</div>
+          </div>
+        </div>
+
+        <div class="text-center text-muted text-small">
+          🎰 Wheel is spinning... Winner will be announced soon!
+        </div>
+      </div>
+
+      <div class="wheel-game-card" onclick="window.location.href='wheel-game.html'">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <div style="font-weight: 600; font-size: 1.125rem;">Quick Spin #2844</div>
+            <div class="text-muted text-small">Created by FastPlayer</div>
+          </div>
+          <span class="countdown-badge warning">⏱️ 28s</span>
+        </div>
+
+        <div class="divider" style="margin: 0.75rem 0;"></div>
+
+        <div class="flex justify-between items-center mb-3">
+          <div>
+            <div class="text-muted text-small">Total Pot</div>
+            <div style="font-size: 1.5rem; font-weight: 700; color: var(--success-green);">180 TON</div>
+          </div>
+          <div class="text-right">
+            <div class="text-muted text-small">Players</div>
+            <div style="font-size: 1.5rem; font-weight: 700;">3/8</div>
+          </div>
+        </div>
+
+        <div class="wheel-players">
+          <div class="wheel-player-avatar">Q1
+            <div class="wheel-player-bet">100</div>
+          </div>
+          <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">W2
+            <div class="wheel-player-bet">50</div>
+          </div>
+          <div class="wheel-player-avatar" style="background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);">E3
+            <div class="wheel-player-bet">30</div>
+          </div>
+        </div>
+
+        <div class="text-muted text-tiny mt-2">
+          💡 Join now! More players = bigger pot
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAB Menu -->
+  <div class="fab-menu" id="fabMenu">
+    <div class="fab-menu-item" onclick="window.location.href='create-game.html'">
+      <div class="fab-menu-icon">🪙</div>
+      <div class="fab-menu-text">Coin Flip Game</div>
+    </div>
+    <div class="fab-menu-item" onclick="window.location.href='create-wheel-game.html'">
+      <div class="fab-menu-icon">🎡</div>
+      <div class="fab-menu-text">Wheel of Fortune</div>
+    </div>
   </div>
 
   <!-- Floating Action Button -->
-  <button class="fab" onclick="window.location.href='create-game.html'" title="Create New Game">
+  <button class="fab" id="fab" onclick="toggleFabMenu()" title="Create New Game">
     +
   </button>
 
@@ -199,13 +591,54 @@
     </a>
   </nav>
 
-  <!-- Toast Notification Example (hidden by default) -->
-  <!-- <div class="toast toast-success" style="display: none;">
-    <div class="toast-icon">✅</div>
-    <div class="toast-content">
-      <div class="toast-title">Success!</div>
-      <div class="toast-message">Your game room has been created.</div>
-    </div>
-  </div> -->
+  <script>
+    // Game type switching
+    function switchGameType(type) {
+      // Update tabs
+      document.getElementById('coinFlipTab').classList.remove('active');
+      document.getElementById('wheelTab').classList.remove('active');
+
+      // Update sections
+      document.getElementById('coinFlipSection').classList.remove('active');
+      document.getElementById('wheelSection').classList.remove('active');
+
+      if (type === 'coinFlip') {
+        document.getElementById('coinFlipTab').classList.add('active');
+        document.getElementById('coinFlipSection').classList.add('active');
+      } else {
+        document.getElementById('wheelTab').classList.add('active');
+        document.getElementById('wheelSection').classList.add('active');
+      }
+    }
+
+    // FAB menu toggle
+    function toggleFabMenu() {
+      const fabMenu = document.getElementById('fabMenu');
+      const fab = document.getElementById('fab');
+
+      fabMenu.classList.toggle('active');
+      fab.classList.toggle('active');
+    }
+
+    // Close FAB menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const fabMenu = document.getElementById('fabMenu');
+      const fab = document.getElementById('fab');
+
+      if (!fab.contains(event.target) && !fabMenu.contains(event.target)) {
+        fabMenu.classList.remove('active');
+        fab.classList.remove('active');
+      }
+    });
+
+    // Simulate countdown updates
+    function updateCountdowns() {
+      // This would be replaced with real-time updates in production
+      console.log('Updating countdowns...');
+    }
+
+    // Update every second
+    setInterval(updateCountdowns, 1000);
+  </script>
 </body>
 </html>

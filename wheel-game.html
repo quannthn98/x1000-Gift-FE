@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wheel Game - Gift_x1000</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .wheel-container {
+      perspective: 1000px;
+      margin: var(--spacing-xl) auto;
+      width: 260px;
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .wheel {
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        #2481cc 0deg 72deg,
+        #fb923c 72deg 144deg,
+        #4ade80 144deg 216deg,
+        #9c6ade 216deg 288deg,
+        #fbbf24 288deg 360deg
+      );
+      box-shadow: var(--shadow-xl), var(--shadow-glow), inset 0 0 40px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      animation: wheelSpin 3s cubic-bezier(0.17, 0.67, 0.12, 0.99) infinite;
+    }
+
+    .wheel.spinning {
+      animation: wheelSpinFast 1s linear infinite;
+    }
+
+    .wheel-center {
+      width: 80px;
+      height: 80px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      z-index: 2;
+    }
+
+    .wheel-pointer {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 25px solid var(--danger-red);
+      z-index: 3;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    @keyframes wheelSpin {
+      0%, 100% {
+        transform: rotate(0deg);
+      }
+      50% {
+        transform: rotate(10deg);
+      }
+    }
+
+    @keyframes wheelSpinFast {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .player-list {
+      margin: var(--spacing-lg) 0;
+    }
+
+    .player-item {
+      background: rgba(30, 30, 46, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-md);
+      margin-bottom: var(--spacing-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+
+    .player-item.winner {
+      border-color: var(--success-green);
+      background: rgba(74, 222, 128, 0.1);
+      box-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+    }
+
+    .player-avatar-large {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .player-info {
+      flex: 1;
+    }
+
+    .player-chance {
+      text-align: right;
+    }
+
+    .chance-bar {
+      width: 100px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin-top: 0.25rem;
+    }
+
+    .chance-bar-fill {
+      height: 100%;
+      background: var(--gradient-success);
+      transition: width var(--transition-base);
+    }
+
+    .countdown-display {
+      text-align: center;
+      margin: var(--spacing-xl) 0;
+    }
+
+    .countdown-number {
+      font-size: 4rem;
+      font-weight: 700;
+      background: var(--gradient-warning);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .countdown-number.danger {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: pulse 1s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    .join-deposit-section {
+      position: fixed;
+      bottom: 80px;
+      left: 0;
+      right: 0;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: var(--spacing-md);
+      background: var(--gradient-bg);
+      border-top: 1px solid var(--border-color);
+      z-index: 100;
+    }
+
+    .join-deposit-section.blocked {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <button class="btn btn-ghost btn-sm" onclick="window.location.href='index.html'">← Exit</button>
+      <div>
+        <span class="badge badge-warning">Active</span>
+      </div>
+      <button class="btn btn-ghost btn-sm">⋮</button>
+    </div>
+
+    <!-- Game Info -->
+    <div class="glass-card mb-3 text-center">
+      <div class="text-muted text-small mb-1">Game ID: #WHL-2847</div>
+      <h3 class="mb-2">Fortune Wheel</h3>
+      <div class="text-small text-muted">Created by WheelMaster</div>
+    </div>
+
+    <!-- Total Pot and Players -->
+    <div class="stats-grid mb-3">
+      <div class="stat-card">
+        <div class="stat-value text-success">285</div>
+        <div class="stat-label">Total Pot (TON)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">5/10</div>
+        <div class="stat-label">Players</div>
+      </div>
+    </div>
+
+    <!-- Countdown Timer -->
+    <div class="countdown-display">
+      <div class="text-muted text-small mb-2">Spinning in</div>
+      <div class="countdown-number" id="countdownNumber">42</div>
+      <div class="text-muted text-small mt-1">seconds</div>
+    </div>
+
+    <!-- Spinning Wheel -->
+    <div class="wheel-container">
+      <div class="wheel-pointer"></div>
+      <div class="wheel" id="wheel">
+        <div class="wheel-center">🎡</div>
+      </div>
+    </div>
+
+    <!-- Player List with Win Chances -->
+    <div class="glass-card">
+      <div class="flex justify-between items-center mb-3">
+        <h4 class="mb-0">Players & Win Chances</h4>
+        <span class="text-muted text-small">Proportional to bet</span>
+      </div>
+
+      <div class="player-list">
+        <div class="player-item">
+          <div class="player-avatar-large" style="background: linear-gradient(135deg, #fb923c 0%, #fbbf24 100%);">CR</div>
+          <div class="player-info">
+            <div style="font-weight: 600;">CryptoRich</div>
+            <div class="text-muted text-small">100 TON</div>
+          </div>
+          <div class="player-chance">
+            <div style="font-weight: 600; color: var(--success-green);">35.1%</div>
+            <div class="chance-bar">
+              <div class="chance-bar-fill" style="width: 35.1%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="player-item">
+          <div class="player-avatar-large" style="background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);">LK</div>
+          <div class="player-info">
+            <div style="font-weight: 600;">LuckyKing</div>
+            <div class="text-muted text-small">75 TON</div>
+          </div>
+          <div class="player-chance">
+            <div style="font-weight: 600; color: var(--success-green);">26.3%</div>
+            <div class="chance-bar">
+              <div class="chance-bar-fill" style="width: 26.3%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="player-item">
+          <div class="player-avatar-large">JD</div>
+          <div class="player-info">
+            <div style="font-weight: 600;">JohnDoe (You)</div>
+            <div class="text-muted text-small">50 TON</div>
+          </div>
+          <div class="player-chance">
+            <div style="font-weight: 600; color: var(--success-green);">17.5%</div>
+            <div class="chance-bar">
+              <div class="chance-bar-fill" style="width: 17.5%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="player-item">
+          <div class="player-avatar-large" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">BW</div>
+          <div class="player-info">
+            <div style="font-weight: 600;">BigWhale</div>
+            <div class="text-muted text-small">50 TON</div>
+          </div>
+          <div class="player-chance">
+            <div style="font-weight: 600; color: var(--success-green);">17.5%</div>
+            <div class="chance-bar">
+              <div class="chance-bar-fill" style="width: 17.5%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="player-item">
+          <div class="player-avatar-large">MP</div>
+          <div class="player-info">
+            <div style="font-weight: 600;">MoonPlayer</div>
+            <div class="text-muted text-small">10 TON</div>
+          </div>
+          <div class="player-chance">
+            <div style="font-weight: 600; color: var(--success-green);">3.5%</div>
+            <div class="chance-bar">
+              <div class="chance-bar-fill" style="width: 3.5%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: rgba(36, 129, 204, 0.1); border-left: 4px solid var(--primary-blue); border-radius: var(--radius-md); padding: var(--spacing-md); margin-top: var(--spacing-md);">
+        <div style="font-weight: 600; margin-bottom: 0.5rem;">💡 How It Works</div>
+        <div class="text-secondary text-small">
+          Your winning chance is proportional to your bet. The more you bet, the higher your chance to win the entire pot!
+        </div>
+      </div>
+    </div>
+
+    <!-- Fairness Proof Link -->
+    <div class="text-center mt-3 mb-4">
+      <a href="fairness-proof.html" class="btn btn-ghost btn-sm">
+        🔒 View Fairness Proof
+      </a>
+    </div>
+
+    <!-- Spacer for fixed bottom section -->
+    <div style="height: 140px;"></div>
+  </div>
+
+  <!-- Join/Deposit Section (Fixed Bottom) -->
+  <div class="join-deposit-section" id="depositSection">
+    <div class="glass-card" style="margin: 0;">
+      <div class="flex items-center justify-between mb-2">
+        <div class="text-small text-muted">Add more to increase your chances</div>
+        <div class="text-small" style="font-weight: 600;">Current: 17.5%</div>
+      </div>
+      <div class="flex gap-2">
+        <input type="number" class="input" placeholder="Amount (TON)" style="flex: 1; margin: 0;" value="25">
+        <button class="btn btn-success" onclick="addDeposit()">+ Add Bet</button>
+      </div>
+      <div class="text-tiny text-muted mt-2">
+        ⚠️ Deposits will be blocked at 5 seconds remaining
+      </div>
+    </div>
+  </div>
+
+  <!-- Winner Modal (hidden by default) -->
+  <div class="modal-overlay" style="display: none;" id="winnerModal">
+    <div class="modal">
+      <div class="modal-header text-center">
+        <div style="font-size: 4rem; margin-bottom: var(--spacing-md);">🎉</div>
+        <h2 class="modal-title">Winner Announced!</h2>
+      </div>
+      <div class="modal-body text-center">
+        <div class="flex items-center justify-center gap-3 mb-4">
+          <div class="avatar avatar-lg">CR</div>
+          <div>
+            <div style="font-size: 1.5rem; font-weight: 700;">CryptoRich</div>
+            <div class="text-muted">Winner</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="text-large" style="color: var(--success-green); font-weight: 700; margin-top: var(--spacing-lg); font-size: 2rem;">
+          +285 TON
+        </div>
+        <div class="text-muted text-small mb-3">Winner takes all (minus 2% fee)</div>
+
+        <div style="background: rgba(30, 30, 46, 0.6); border-radius: var(--radius-md); padding: var(--spacing-md);">
+          <div class="flex justify-between text-small mb-1">
+            <span class="text-secondary">Total Pot</span>
+            <span>285 TON</span>
+          </div>
+          <div class="flex justify-between text-small mb-1">
+            <span class="text-secondary">Platform Fee (2%)</span>
+            <span class="text-warning">-5.70 TON</span>
+          </div>
+          <div class="flex justify-between" style="padding-top: 0.5rem; border-top: 1px solid var(--border-color);">
+            <span style="font-weight: 600;">Winner Receives</span>
+            <span class="text-success" style="font-weight: 700;">279.30 TON</span>
+          </div>
+        </div>
+
+        <div class="text-muted text-small mt-3">
+          💰 You lost 50 TON this round
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="window.location.href='fairness-proof.html'">View Proof</button>
+        <button class="btn btn-primary" onclick="window.location.href='index.html'">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let countdown = 42;
+    let isBlocked = false;
+
+    // Update countdown
+    const countdownInterval = setInterval(() => {
+      countdown--;
+      const countdownEl = document.getElementById('countdownNumber');
+      const depositSection = document.getElementById('depositSection');
+      const wheel = document.getElementById('wheel');
+
+      countdownEl.textContent = countdown;
+
+      // Change color when critical
+      if (countdown <= 5) {
+        countdownEl.classList.add('danger');
+
+        // Block deposits
+        if (!isBlocked) {
+          isBlocked = true;
+          depositSection.classList.add('blocked');
+          depositSection.querySelector('.text-tiny').textContent = '🚫 Deposits are now blocked';
+        }
+      }
+
+      // Start spinning
+      if (countdown === 3) {
+        wheel.classList.add('spinning');
+      }
+
+      // Show winner
+      if (countdown === 0) {
+        clearInterval(countdownInterval);
+        setTimeout(() => {
+          document.getElementById('winnerModal').style.display = 'flex';
+        }, 1000);
+      }
+    }, 1000);
+
+    function addDeposit() {
+      const amount = parseFloat(document.querySelector('.join-deposit-section input').value);
+
+      if (!amount || amount <= 0) {
+        alert('Please enter a valid amount');
+        return;
+      }
+
+      if (isBlocked) {
+        alert('Deposits are blocked! The wheel is about to spin.');
+        return;
+      }
+
+      alert(`Adding ${amount} TON to your bet!\nYour winning chance will increase.`);
+      // In a real app, this would update the bet and recalculate chances
+    }
+  </script>
+</body>
+</html>
